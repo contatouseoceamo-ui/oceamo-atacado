@@ -541,6 +541,19 @@ h1,h2,h3{text-wrap:balance}
 .conds{margin-top:30px;padding-top:18px;border-top:1px solid var(--fio)}
 .conds h3{margin:0;font-size:.8rem;font-weight:500;color:var(--suave)}
 .conds ul{margin:10px 0 0;padding-left:18px;font-size:.86rem;color:var(--texto);display:flex;flex-direction:column;gap:4px}
+.envio{max-width:860px;margin:28px auto 0;padding:24px;border:1px solid var(--fio);border-radius:6px;background:var(--areia)}
+.envio h2{margin:0;font-family:var(--display);font-weight:500;font-size:1.45rem;color:var(--cacau)}
+.env-sub{margin:6px 0 0;font-size:.9rem;color:var(--suave)}
+.env-passos{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-direction:column;gap:18px}
+.env-passos li{display:flex;gap:14px;align-items:flex-start}
+.env-n{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--caramelo-esc);color:var(--areia);font-family:var(--display);font-size:1rem;margin-top:8px}
+.env-c{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.env-btn{min-height:52px;font-size:.95rem;padding:0 24px}
+.env-btn svg{width:20px;height:20px;flex:none}
+.env-dica{margin:0;font-size:.84rem;line-height:1.5;color:var(--texto)}
+.env-alt{margin:20px 0 0;padding-top:14px;border-top:1px solid var(--fio);font-size:.84rem;color:var(--suave)}
+.env-alt .lnk{font-size:inherit}
+@media (max-width:560px){.envio{padding:18px 16px}.env-btn{width:100%;padding:0 14px;font-size:.9rem}.env-n{margin-top:11px}.env-passos li{gap:10px}}
 .doc-acoes{max-width:860px;margin:24px auto 0;display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px}
 .doc-acoes .esp{flex:1}
 .lnk.alerta{color:var(--erro);text-decoration-color:var(--erro)}
@@ -717,12 +730,24 @@ h1,h2,h3{text-wrap:balance}
       <li class="feito"><i>2</i>Seus dados</li>
       <li class="agora"><i>3</i>Orçamento</li>
     </ol>
-    <p class="aviso-ok"><i aria-hidden="true"></i><span><strong>Orçamento gerado.</strong> Toque em <strong>Enviar pelo WhatsApp</strong>: a mensagem já vai pronta com todo o pedido. Se quiser, baixe também o PDF.</span></p>
+    <p class="aviso-ok"><i aria-hidden="true"></i><span><strong>Orçamento pronto.</strong> Confira abaixo e envie o PDF para a Oceamo pelo WhatsApp.</span></p>
     <article class="papel" id="papel"></article>
+    <section class="envio" aria-labelledby="envTit">
+      <h2 id="envTit">Envie o seu pedido</h2>
+      <p class="env-sub">Mande o orçamento em PDF: chega organizado, do jeito que aparece aqui.</p>
+      <ol class="env-passos">
+        <li><span class="env-n" aria-hidden="true">1</span><div class="env-c">
+          <button class="btn env-btn" type="button" id="btnPDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 19.5l1.1-3.6A8 8 0 1 1 8.4 18.6z"/></svg><span id="btnPDFTxt">Enviar PDF no WhatsApp</span></button>
+          <p class="env-dica" id="envDica1">Na tela que abrir, toque em <strong>WhatsApp</strong> e escolha a conversa com a <strong>Oceamo</strong>.</p>
+        </div></li>
+        <li id="envPasso2" hidden><span class="env-n" aria-hidden="true">2</span><div class="env-c">
+          <a class="btn contorno env-btn" id="zapAbrir" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 19.5l1.1-3.6A8 8 0 1 1 8.4 18.6z"/></svg>Abrir conversa</a>
+          <p class="env-dica">Na conversa, toque no <strong>clipe de anexo</strong>, escolha <strong>Documento</strong> e selecione o arquivo <strong class="num" id="envArq"></strong>.</p>
+        </div></li>
+      </ol>
+      <p class="env-alt">Não conseguiu enviar o PDF? <a class="lnk" id="zapLink" href="#" target="_blank" rel="noopener">Enviar como mensagem de texto</a> <span aria-hidden="true">·</span> <button class="lnk" type="button" id="btnCopiar">Copiar texto</button></p>
+    </section>
     <div class="doc-acoes">
-      <a class="btn" id="zapLink" href="#" target="_blank" rel="noopener">Enviar pelo WhatsApp</a>
-      <button class="btn contorno" type="button" id="btnPDF">Baixar orçamento em PDF</button>
-      <button class="btn contorno" type="button" id="btnCopiar">Copiar texto</button>
       <span class="esp"></span>
       <button class="lnk" type="button" data-ir="dados">Editar dados</button>
       <button class="lnk" type="button" id="novoPedido">Começar novo pedido</button>
@@ -1542,22 +1567,43 @@ async function montarPDF(){
   for (let k = 1; k <= n; k++){ doc.setPage(k); doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5); doc.setTextColor(150, 140, 130); doc.text('Oceamo Swimwear', 14, H - 8); if (n > 1) doc.text(`${k} de ${n}`, W - 14, H - 8, { align:'right' }); }
   return doc.output('blob');
 }
+const podeCompartilharPDF = (() => { try { return !!(navigator.canShare && navigator.canShare({ files:[new File(['x'], 'a.pdf', { type:'application/pdf' })] })); } catch (e) { return false; } })();
+function prepararEnvio(){
+  const nome = `Orçamento ${orc.nro} - ${orc.D.nome}.pdf`; orc.arq = nome;
+  $('#envArq').textContent = nome;
+  $('#zapAbrir').href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(`Oi! Segue o meu orçamento de atacado ${orc.nro} em PDF.`)}`;
+  if (podeCompartilharPDF){
+    $('#btnPDFTxt').textContent = 'Enviar PDF no WhatsApp';
+    $('#envDica1').innerHTML = 'Na tela que abrir, toque em <strong>WhatsApp</strong> e escolha a conversa com a <strong>Oceamo</strong>.';
+    $('#envPasso2').hidden = true;
+  } else {
+    $('#btnPDFTxt').textContent = 'Baixar o PDF';
+    $('#btnPDF svg').outerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>';
+    $('#envDica1').textContent = 'O arquivo fica salvo no seu aparelho.';
+    $('#envPasso2').hidden = false;
+  }
+}
 async function entregarPDF(){
-  const b = $('#btnPDF'), txt = b.textContent; b.textContent = 'Gerando o PDF…'; b.disabled = true;
-  const fim = () => { b.textContent = txt; b.disabled = false; };
+  const b = $('#btnPDF'), t = $('#btnPDFTxt'), txt = t.textContent; t.textContent = 'Gerando o PDF…'; b.disabled = true;
+  const fim = () => { t.textContent = txt; b.disabled = false; };
   let blob; try { blob = await montarPDF(); } catch (e) { fim(); toast('Não foi possível gerar o PDF. Confira a internet e tente de novo.'); return; }
-  const nome = `Orçamento ${orc.nro} - ${orc.D.nome}.pdf`;
-  try {
-    const file = new File([blob], nome, { type:'application/pdf' });
-    if (navigator.canShare && navigator.canShare({ files:[file] })){ await navigator.share({ files:[file], title:nome }); fim(); return; }
-  } catch (e) { if (e && e.name === 'AbortError'){ fim(); return; } }
+  const nome = orc.arq;
+  if (podeCompartilharPDF){
+    try {
+      await navigator.share({ files:[new File([blob], nome, { type:'application/pdf' })], title:nome });
+      fim(); toast('Pronto! Confira se o PDF chegou na conversa com a Oceamo.'); return;
+    } catch (e) {
+      if (e && e.name === 'AbortError'){ fim(); return; }
+      $('#envPasso2').hidden = false;
+    }
+  }
   try {
     const dl = window.claude && window.claude.use ? await window.claude.use('downloads') : null;
-    if (dl){ await dl.save({ filename:nome, data:blob }); fim(); toast('PDF salvo. Agora envie pelo WhatsApp.'); return; }
+    if (dl){ await dl.save({ filename:nome, data:blob }); fim(); toast('PDF salvo. Agora abra a conversa com a Oceamo e anexe o arquivo.'); return; }
   } catch (e) { if (e && e.code === 'declined'){ fim(); return; } }
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = nome; document.body.appendChild(a); a.click(); a.remove();
   setTimeout(() => URL.revokeObjectURL(a.href), 5000);
-  fim(); toast('PDF baixado. Agora envie pelo WhatsApp.');
+  fim(); toast('PDF baixado. Agora abra a conversa com a Oceamo e anexe o arquivo.');
 }
 function gerarOrcamento(){
   const d = new Date(), assin = JSON.stringify(state.itens) + state.pagamento + state.parcelas;
@@ -1616,6 +1662,7 @@ function gerarOrcamento(){
   orc.txt = txt; Object.assign(orc, { D, forma, tot, linhas });
   $('#zapLink').href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(txt)}`;
   $('#copiaTxt').value = txt; $('#copia').hidden = true;
+  prepararEnvio();
 }
 $('#btnPDF').addEventListener('click', entregarPDF);
 $('#btnCopiar').addEventListener('click', () => {
