@@ -75,10 +75,15 @@ h1,h2,h3{text-wrap:balance}
 .lnk:hover{color:var(--caramelo-hover)}
 
 /* faixa e topo */
-.faixa{background:var(--caramelo);color:var(--cacau);font-size:.68rem;font-weight:500;text-align:center;text-transform:uppercase;letter-spacing:.16em}
-.faixa .wrap{padding-block:9px;display:flex;justify-content:center;align-items:center;gap:14px;white-space:nowrap;overflow:hidden}
+.faixa{background:var(--caramelo);color:var(--cacau);font-size:.68rem;font-weight:500;text-transform:uppercase;letter-spacing:.16em;overflow:hidden;white-space:nowrap}
+.faixa .f-trilho{display:flex;width:max-content;padding-block:9px;animation:faixa-rola 45s linear infinite}
+.faixa:hover .f-trilho{animation-play-state:paused}
+.faixa .f-grp,.faixa .f-item{display:flex;align-items:center;flex:none}
+.faixa .f-item{gap:22px;padding-right:22px}
 .faixa .f-sep{width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.55;flex:none}
-.faixa .f-mob{display:none}
+.faixa .f-sep-m{display:none}.faixa .moeda-faixa:not([hidden])+.f-sep-m{display:block}
+@keyframes faixa-rola{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.faixa .f-trilho{animation:none;margin-inline:auto}.faixa .f-grp+.f-grp,.faixa .f-item+.f-item{display:none}}
 .topo{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:var(--creme);border-bottom:1px solid var(--fio)}
 .topo-in{height:var(--hh);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px}
 .topo-esq{font-size:.82rem;color:var(--suave)}
@@ -613,10 +618,9 @@ h1,h2,h3{text-wrap:balance}
   .capa{grid-template-columns:1fr;min-height:0}
   .capa-foto{display:none}
   .capa-txt{margin-left:0;padding-block:44px 48px}
-  .faixa{font-size:.6rem;letter-spacing:.12em}
-  .faixa .wrap{gap:10px;padding-block:8px}
-  .faixa .f-desk,.faixa .moeda-faixa{display:none!important}
-  .faixa .f-mob{display:inline}
+  .faixa{font-size:.62rem;letter-spacing:.13em}
+  .faixa .f-trilho{padding-block:8px;animation-duration:34s}
+  .faixa .f-item{gap:16px;padding-right:16px}
   .topo-in{grid-template-columns:1fr auto 1fr;gap:8px}
   .id-atual{height:34px;padding:0 8px 0 9px;gap:6px;font-size:.72rem}
   .topo .marca{justify-self:center}
@@ -637,7 +641,7 @@ h1,h2,h3{text-wrap:balance}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 
-<div class="faixa"><div class="wrap"><span class="f-min">Pedido mínimo de 12 peças</span><span class="f-sep" aria-hidden="true"></span><span class="f-desk">Mix livre de modelos, cores e tamanhos</span><span class="f-mob">Mix livre</span><span class="moeda-faixa" data-so-lang="en es" hidden> · Valores em reais (R$), moeda do Brasil.</span></div></div>
+<div class="faixa"><p class="vh">Pedido mínimo de 12 peças, combinando modelos, cores e tamanhos.</p><div class="f-trilho" aria-hidden="true"><span class="f-grp"><span class="f-item"><span>Pedido mínimo de 12 peças</span><span class="f-sep"></span><span>Combinando modelos, cores e tamanhos</span><span class="f-sep"></span><span class="moeda-faixa" data-so-lang="en es" hidden>Valores em reais (R$), moeda do Brasil.</span><span class="f-sep f-sep-m"></span></span><span class="f-item"><span>Pedido mínimo de 12 peças</span><span class="f-sep"></span><span>Combinando modelos, cores e tamanhos</span><span class="f-sep"></span><span class="moeda-faixa" data-so-lang="en es" hidden>Valores em reais (R$), moeda do Brasil.</span><span class="f-sep f-sep-m"></span></span><span class="f-item"><span>Pedido mínimo de 12 peças</span><span class="f-sep"></span><span>Combinando modelos, cores e tamanhos</span><span class="f-sep"></span><span class="moeda-faixa" data-so-lang="en es" hidden>Valores em reais (R$), moeda do Brasil.</span><span class="f-sep f-sep-m"></span></span></span><span class="f-grp"><span class="f-item"><span>Pedido mínimo de 12 peças</span><span class="f-sep"></span><span>Combinando modelos, cores e tamanhos</span><span class="f-sep"></span><span class="moeda-faixa" data-so-lang="en es" hidden>Valores em reais (R$), moeda do Brasil.</span><span class="f-sep f-sep-m"></span></span><span class="f-item"><span>Pedido mínimo de 12 peças</span><span class="f-sep"></span><span>Combinando modelos, cores e tamanhos</span><span class="f-sep"></span><span class="moeda-faixa" data-so-lang="en es" hidden>Valores em reais (R$), moeda do Brasil.</span><span class="f-sep f-sep-m"></span></span><span class="f-item"><span>Pedido mínimo de 12 peças</span><span class="f-sep"></span><span>Combinando modelos, cores e tamanhos</span><span class="f-sep"></span><span class="moeda-faixa" data-so-lang="en es" hidden>Valores em reais (R$), moeda do Brasil.</span><span class="f-sep f-sep-m"></span></span></span></div></div>
 <header class="topo">
   <div class="wrap topo-in">
     <div class="topo-l">
@@ -1778,6 +1782,10 @@ function gerarOrcamento(){
   prepararEnvio();
 }
 $('#btnPDF').addEventListener('click', entregarPDF);
+/* faixa rolante: velocidade constante, seja qual for o idioma ou a tela */
+(() => { const g = document.querySelector('.faixa .f-grp'), t = document.querySelector('.faixa .f-trilho'); if (!g || !t || !window.ResizeObserver) return;
+  new ResizeObserver(() => { t.style.animationDuration = Math.max(20, g.offsetWidth / 38) + 's'; }).observe(g); })();
+
 $('#btnCopiar').addEventListener('click', () => {
   const plano = () => { $('#copia').hidden = false; $('#copiaTxt').focus(); $('#copiaTxt').select(); };
   try { navigator.clipboard.writeText(orc.txt).then(() => toast('Texto do orçamento copiado'), plano); } catch (e) { plano(); }
@@ -1921,8 +1929,6 @@ renderCatalogo(); atualizar(); ir('loja');
 const I18N = {
   /* topo, capa e regras */
   'Pedido mínimo de 12 peças, combinando modelos, cores e tamanhos': ['12-piece minimum order, mixing styles, colors and sizes', 'Pedido mínimo de 12 piezas, combinando modelos, colores y tallas'],
-  'Mix livre de modelos, cores e tamanhos': ['Mix and match styles, colors and sizes', 'Mix libre de modelos, colores y tallas'],
-  'Mix livre': ['Mix and match', 'Mix libre'],
   'Valores em reais (R$), moeda do Brasil.': ['Prices in Brazilian reais (R$ · BRL).', 'Precios en reales brasileños (R$ · BRL).'],
   '· Valores em reais (R$), moeda do Brasil.': ['· Prices in Brazilian reais (R$ · BRL).', '· Precios en reales brasileños (R$ · BRL).'],
   'Guia de medidas Oceamo: tabela de top (busto) e de calcinha (cintura e quadril) nos tamanhos P, M, G e GG, e como medir': ['Oceamo size guide: top (bust) and bottom (waist and hips) table in sizes P, M, G and GG, and how to measure', 'Guía de medidas Oceamo: tabla de top (busto) y de panty (cintura y cadera) en las tallas P, M, G y GG, y cómo medir'],
@@ -1939,6 +1945,8 @@ const I18N = {
   'Como funciona': ['How it works', 'Cómo funciona'],
   'Biquíni Mykonos na cor verde esmeralda': ['Mykonos bikini in emerald green', 'Bikini Mykonos en verde esmeralda'],
   'Como funciona o atacado': ['How wholesale works', 'Cómo funciona la venta al por mayor'],
+  'Combinando modelos, cores e tamanhos': ['Mix and match styles, colors and sizes', 'Combinando modelos, colores y tallas'],
+  'Pedido mínimo de 12 peças, combinando modelos, cores e tamanhos.': ['12-piece minimum order, mixing styles, colors and sizes.', 'Pedido mínimo de 12 piezas, combinando modelos, colores y tallas.'],
   'Pedido mínimo de 12 peças': ['12-piece minimum order', 'Pedido mínimo de 12 piezas'],
   'Combine modelos, cores e tamanhos como preferir para montar a sua grade.': ['Mix styles, colors and sizes however you like to build your assortment.', 'Combina modelos, colores y tallas como prefieras para armar tu surtido.'],
   'Excelente margem para revenda': ['Excellent resale margin', 'Excelente margen de reventa'],
