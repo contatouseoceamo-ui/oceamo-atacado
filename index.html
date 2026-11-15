@@ -1740,19 +1740,19 @@ function gerarOrcamento(){
     <span class="moeda" data-so-lang="en es" hidden>Valores em reais (R$), moeda do Brasil.</span>
     ${D.obs ? `<div class="conds"><h3>Observações</h3><p style="margin:8px 0 0;font-size:.9rem;white-space:pre-wrap">${esc(D.obs)}</p></div>` : ''}
     <div class="conds"><h3>Condições</h3><ul>
-      <li><strong style="color:var(--cacau)">O prazo de confecção depende da quantidade de conjuntos. Assim que eu receber o seu orçamento, informo o prazo final junto com a estimativa de entrega dos Correios;</strong></li>
-      <li>O frete é à parte e pago somente no dia do envio. Quando os seus conjuntos estiverem prontos, entro em contato para você escolher entre PAC e Sedex;</li>
-      <li><strong style="color:var(--cacau)">A produção começa após a compensação do pagamento;</strong></li>
-      <li>Peças sem etiqueta de marca, só etiqueta de tamanho;</li>
-      <li>Não autorizamos o uso das fotos e vídeos da Oceamo.</li>
+      <li><strong style="color:var(--cacau)">Prazo de confecção: depende da quantidade de conjuntos. Assim que eu receber o seu orçamento, informo o prazo final e a estimativa de entrega dos Correios;</strong></li>
+      <li><strong style="color:var(--cacau)">Início da produção: após a compensação do pagamento;</strong></li>
+      <li><strong>Frete:</strong> à parte e pago somente no dia do envio. Quando os conjuntos estiverem prontos, entro em contato para você escolher entre PAC e Sedex;</li>
+      <li><strong>Etiquetas:</strong> peças sem etiqueta de marca, só com etiqueta de tamanho;</li>
+      <li><strong>Fotos e vídeos:</strong> não autorizamos o uso das fotos e vídeos da Oceamo.</li>
     </ul>
     <h3 class="conds-sub">Diferenciais Oceamo</h3><ul>
-      <li><strong>Produção própria:</strong> cada peça nasce na nossa confecção, com preço justo, controle total da qualidade e agilidade para atender o seu pedido;</li>
-      <li><strong>Tecidos premium selecionados:</strong> tecidos de alta performance, testados para garantir caimento perfeito, toque macio e cor que dura muitas lavagens;</li>
-      <li><strong>Modelagens exclusivas e testadas:</strong> desenvolvidas e validadas em diferentes biotipos, para vestir bem e valorizar o corpo de cada cliente;</li>
-      <li><strong>Acabamento refinado e invisível:</strong> costura embutida e alças reguláveis nos ombros e nas costas, para conforto e um caimento impecável desde o primeiro uso;</li>
-      <li><strong>Acessórios banhados a ouro 24K:</strong> banho cataforético, mais resistente ao cloro, à água do mar e ao desgaste, que preserva o brilho por muito mais tempo;</li>
-      <li><strong>Excelente margem para revenda:</strong> preços de atacado reais, com espaço de lucro para você precificar com segurança e fazer o seu negócio crescer.</li>
+      <li><strong>Produção própria:</strong> preço justo, controle total da qualidade e agilidade no seu pedido;</li>
+      <li><strong>Tecidos premium:</strong> caimento perfeito, toque macio e cor que dura muitas lavagens;</li>
+      <li><strong>Modelagens exclusivas:</strong> testadas em diferentes biotipos, para valorizar o corpo de cada cliente;</li>
+      <li><strong>Acabamento refinado:</strong> costura embutida e alças reguláveis nos ombros e nas costas;</li>
+      <li><strong>Acessórios banhados a ouro 24K:</strong> banho cataforético, resistente ao cloro, à água do mar e ao desgaste;</li>
+      <li><strong>Margem para revenda:</strong> preços de atacado reais, com espaço de lucro para o seu negócio crescer.</li>
     </ul></div>`;
 
   const txt = [
@@ -2071,6 +2071,24 @@ const I18N = {
   'Total dos produtos': ['Products total', 'Total de los productos'],
   'Observações': ['Notes', 'Observaciones'],
   'Condições': ['Terms', 'Condiciones'],
+  'Prazo de confecção: depende da quantidade de conjuntos. Assim que eu receber o seu orçamento, informo o prazo final e a estimativa de entrega dos Correios;': ['Production time: depends on the number of sets. As soon as I receive your quote, I’ll give you the final timeline and the Correios delivery estimate;', 'Plazo de confección: depende de la cantidad de conjuntos. En cuanto reciba tu presupuesto, te informo el plazo final y la estimación de entrega de Correios;'],
+  'Início da produção: após a compensação do pagamento;': ['Production start: once payment clears;', 'Inicio de la producción: después de la acreditación del pago;'],
+  'Frete:': ['Shipping:', 'Envío:'],
+  'à parte e pago somente no dia do envio. Quando os conjuntos estiverem prontos, entro em contato para você escolher entre PAC e Sedex;': ['separate and paid only on the day it ships. When your sets are ready, I’ll contact you so you can choose between PAC and Sedex;', 'aparte y se paga solo el día del despacho. Cuando los conjuntos estén listos, te contacto para que elijas entre PAC y Sedex;'],
+  'Etiquetas:': ['Labels:', 'Etiquetas:'],
+  'peças sem etiqueta de marca, só com etiqueta de tamanho;': ['no brand label, only a size label;', 'piezas sin etiqueta de marca, solo con etiqueta de talla;'],
+  'Fotos e vídeos:': ['Photos and videos:', 'Fotos y videos:'],
+  'não autorizamos o uso das fotos e vídeos da Oceamo.': ['use of Oceamo photos and videos is not authorized.', 'no autorizamos el uso de las fotos y videos de Oceamo.'],
+  'preço justo, controle total da qualidade e agilidade no seu pedido;': ['fair prices, full quality control and a quick turnaround on your order;', 'precio justo, control total de la calidad y agilidad en tu pedido;'],
+  'Tecidos premium:': ['Premium fabrics:', 'Telas premium:'],
+  'caimento perfeito, toque macio e cor que dura muitas lavagens;': ['perfect fit, a soft touch and color that lasts through many washes;', 'caída perfecta, tacto suave y color que dura muchos lavados;'],
+  'Modelagens exclusivas:': ['Exclusive patterns:', 'Patronajes exclusivos:'],
+  'testadas em diferentes biotipos, para valorizar o corpo de cada cliente;': ['tested on different body types, to flatter every customer;', 'probados en diferentes biotipos, para realzar el cuerpo de cada clienta;'],
+  'Acabamento refinado:': ['Refined finish:', 'Acabado refinado:'],
+  'costura embutida e alças reguláveis nos ombros e nas costas;': ['concealed seams and adjustable straps at the shoulders and back;', 'costuras ocultas y tiras regulables en los hombros y en la espalda;'],
+  'banho cataforético, resistente ao cloro, à água do mar e ao desgaste;': ['cataphoretic coating, resistant to chlorine, seawater and wear;', 'baño cataforético, resistente al cloro, al agua de mar y al desgaste;'],
+  'Margem para revenda:': ['Resale margin:', 'Margen de reventa:'],
+  'preços de atacado reais, com espaço de lucro para o seu negócio crescer.': ['true wholesale prices, with room for profit so your business can grow.', 'precios mayoristas reales, con margen de ganancia para que tu negocio crezca.'],
   'Diferenciais Oceamo': ['Why Oceamo', 'Diferenciales Oceamo'],
   'Produção própria:': ['In-house production:', 'Producción propia:'],
   'cada peça nasce na nossa confecção, com preço justo, controle total da qualidade e agilidade para atender o seu pedido;': ['every piece is made in our own workshop, with fair prices, full quality control and quick turnaround on your order;', 'cada pieza nace en nuestro taller, con precio justo, control total de la calidad y agilidad para atender tu pedido;'],
