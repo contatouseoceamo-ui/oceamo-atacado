@@ -82,10 +82,10 @@ h1,h2,h3{text-wrap:balance}
 .topo-esq{font-size:.82rem;color:var(--suave)}
 .topo-l{display:flex;align-items:center;gap:16px;min-width:0}
 .idioma{display:inline-flex;align-items:center;gap:2px;padding:3px;border:1px solid var(--fio);border-radius:999px;background:var(--areia);color:var(--cacau)}
-.idioma button{display:inline-flex;align-items:center;gap:6px;border:0;background:none;padding:5px 9px 5px 6px;border-radius:999px;font:inherit;font-size:.72rem;font-weight:500;letter-spacing:.06em;color:var(--suave);line-height:1}
+.idioma button{display:inline-flex;align-items:center;gap:5px;border:0;background:none;padding:4px 8px 4px 5px;border-radius:999px;font:inherit;font-size:.68rem;font-weight:500;letter-spacing:.06em;color:var(--suave);line-height:1}
 .idioma button:hover{color:var(--cacau)}
 .idioma button[aria-pressed="true"]{background:var(--branco);color:var(--cacau);box-shadow:0 0 0 1.5px var(--caramelo-esc)}
-.bandeira{width:22px;height:16px;border-radius:3px;flex:none;box-shadow:0 0 0 .5px rgba(0,0,0,.18);opacity:.75;transition:opacity .2s}
+.bandeira{width:19px;height:14px;border-radius:3px;flex:none;box-shadow:0 0 0 .5px rgba(0,0,0,.18);opacity:.75;transition:opacity .2s}
 .idioma button:hover .bandeira,.idioma button[aria-pressed="true"] .bandeira{opacity:1}
 .marca{background:none;border:0;padding:0 0 0 .34em;font-family:var(--display);font-weight:500;font-size:1.5rem;letter-spacing:.34em;color:var(--cacau)}
 .sacola{justify-self:end;display:inline-flex;align-items:center;gap:10px;border:1px solid var(--fio);background:var(--areia);border-radius:999px;padding:8px 16px;font-size:.86rem;color:var(--cacau)}
@@ -598,14 +598,11 @@ h1,h2,h3{text-wrap:balance}
   .capa-foto{display:none}
   .capa-txt{margin-left:0;padding-block:44px 48px}
   .faixa{font-size:.74rem}
-  .topo-in{grid-template-columns:auto 1fr auto;gap:8px}
-  .topo-esq{display:none}
-  .topo .marca{order:-1}
-  .topo-l{justify-self:end}
+  .topo-in{grid-template-columns:1fr auto 1fr;gap:8px}
   .idioma{padding:2px}
-  .idioma button{padding:5px}
+  .idioma button{padding:4px}
   .idioma button span{display:none}
-  .topo .marca{justify-self:start;padding-left:0;font-size:1.25rem}
+  .topo .marca{justify-self:center;padding-left:.34em;font-size:1.2rem}
   .sacola{padding:8px 14px;white-space:nowrap}
   .sacola .s-txt{display:none}
   .regra h2{font-size:1rem}
@@ -623,7 +620,6 @@ h1,h2,h3{text-wrap:balance}
 <header class="topo">
   <div class="wrap topo-in">
     <div class="topo-l">
-      <span class="topo-esq">Atacado 2027</span>
       <div class="idioma" role="group" aria-label="Idioma · Language · Idioma" data-noi18n><button type="button" data-lang="pt" aria-pressed="true" aria-label="Português" title="Português"><svg class="bandeira" viewBox="0 0 28 20" aria-hidden="true"><rect width="28" height="20" fill="#009C3B"/><path d="M14 2.2 25.6 10 14 17.8 2.4 10z" fill="#FFDF00"/><circle cx="14" cy="10" r="4.6" fill="#002776"/><path d="M9.6 9.1c3-.9 6.1-.6 8.8.9" stroke="#fff" stroke-width=".9" fill="none"/></svg><span>PT</span></button><button type="button" data-lang="en" aria-pressed="false" aria-label="English" title="English"><svg class="bandeira" viewBox="0 0 28 20" aria-hidden="true"><rect width="28" height="20" fill="#fff"/><g fill="#B22234"><rect width="28" height="1.54"/><rect y="3.08" width="28" height="1.54"/><rect y="6.15" width="28" height="1.54"/><rect y="9.23" width="28" height="1.54"/><rect y="12.31" width="28" height="1.54"/><rect y="15.38" width="28" height="1.54"/><rect y="18.46" width="28" height="1.54"/></g><rect width="12.6" height="10.77" fill="#3C3B6E"/><g fill="#fff"><circle cx="2.1" cy="1.9" r=".55"/><circle cx="5.3" cy="1.9" r=".55"/><circle cx="8.5" cy="1.9" r=".55"/><circle cx="11.2" cy="1.9" r=".55"/><circle cx="3.7" cy="4" r=".55"/><circle cx="6.9" cy="4" r=".55"/><circle cx="10" cy="4" r=".55"/><circle cx="2.1" cy="6.1" r=".55"/><circle cx="5.3" cy="6.1" r=".55"/><circle cx="8.5" cy="6.1" r=".55"/><circle cx="11.2" cy="6.1" r=".55"/><circle cx="3.7" cy="8.3" r=".55"/><circle cx="6.9" cy="8.3" r=".55"/><circle cx="10" cy="8.3" r=".55"/></g></svg><span>EN</span></button><button type="button" data-lang="es" aria-pressed="false" aria-label="Español" title="Español"><svg class="bandeira" viewBox="0 0 28 20" aria-hidden="true"><rect width="28" height="20" fill="#AA151B"/><rect y="5" width="28" height="10" fill="#F1BF00"/></svg><span>ES</span></button></div>
     </div>
     <button class="marca" type="button" data-ir="loja" aria-label="Oceamo, voltar aos modelos">OCEAMO</button>
