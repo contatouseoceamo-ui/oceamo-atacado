@@ -671,7 +671,7 @@ h1,h2,h3{text-wrap:balance}
     <div class="regra"><h2>Excelente margem para revenda</h2><p>Preços de atacado reais, com espaço de lucro para você precificar com segurança e fazer o seu negócio crescer.</p></div>
     <div class="regra"><h2>Tamanhos do P ao GG</h2><p>Tops com aro (Mykonos, Maldivas, Amalfi e Aurora) vão do P ao G. Top e calcinha podem ser de tamanhos diferentes.</p></div>
     <div class="regra"><h2>Pronto para a sua marca</h2><p>As peças seguem sem etiqueta de marca, apenas com etiqueta de tamanho.</p></div>
-    <p class="regras-pag">Pix à vista com o melhor preço, ou cartão em até 3x sem juros. O prazo de confecção depende da quantidade de conjuntos, e o prazo final é informado no pagamento, junto com o cálculo do frete.</p>
+    <p class="regras-pag">Pix à vista com o melhor preço, ou cartão em até 3x sem juros. O prazo de confecção depende da quantidade de conjuntos e é informado assim que eu receber o seu orçamento, junto com a estimativa de entrega dos Correios. O frete é pago só no dia do envio.</p>
   </section>
 
   <section id="modelos" aria-label="Modelos">
@@ -737,7 +737,7 @@ h1,h2,h3{text-wrap:balance}
           <p class="dica" id="cepMsg" hidden></p>
           <div class="frete-nota">
             <h3>Frete à parte</h3>
-            <p>O frete é à parte. Assim que eu receber o seu orçamento, calculo o frete para o seu endereço e te envio as opções de PAC e Sedex para você escolher.</p>
+            <p>O frete é à parte e pago somente no dia do envio. Quando o seu pedido ficar pronto, entro em contato para você escolher entre PAC e Sedex.</p>
           </div>
         </div>
 
@@ -796,9 +796,9 @@ h1,h2,h3{text-wrap:balance}
       </ol>
       <div class="env-depois">
         <h3>O que acontece depois</h3>
-        <p>Assim que recebermos o seu orçamento, verificamos com a confecção o prazo de produção do seu pedido e calculamos o frete dos Correios (PAC e Sedex) para o seu endereço.</p>
-        <p>Como o prazo depende da quantidade de peças e da agenda da confecção, <strong>só conseguimos informar o prazo depois dessa verificação</strong>. Em seguida, eu entro em contato pelo WhatsApp com o prazo e as opções de frete, para combinarmos tudo antes do pagamento.</p>
-        <p>O frete é pago à parte, <strong>somente quando os seus conjuntos estiverem prontos</strong>, na opção que você escolher.</p>
+        <p>Assim que recebermos o seu orçamento, verificamos com a confecção o prazo de produção do seu pedido e consultamos nos Correios a estimativa de entrega para o seu CEP.</p>
+        <p>Como o prazo depende da quantidade de peças e da agenda da confecção, <strong>só conseguimos informar o prazo depois dessa verificação</strong>. Em seguida, eu entro em contato pelo WhatsApp com o prazo de confecção e a estimativa de entrega, para combinarmos tudo antes do pagamento.</p>
+        <p>O frete é pago à parte, <strong>somente no dia do envio</strong>. Quando os seus conjuntos estiverem prontos, entro em contato para você escolher entre PAC e Sedex.</p>
       </div>
       <p class="env-alt">Não conseguiu enviar o PDF? <a class="lnk" id="zapLink" href="#" target="_blank" rel="noopener">Enviar como mensagem de texto</a> <span aria-hidden="true">·</span> <button class="lnk" type="button" id="btnCopiar">Copiar texto</button></p>
     </section>
@@ -895,7 +895,7 @@ h1,h2,h3{text-wrap:balance}
         <div class="cartao"><span>No cartão</span><span class="num" id="gCartao">R$ 0</span></div>
       </div>
       <span class="moeda" data-so-lang="en es" hidden>Valores em reais (R$), moeda do Brasil.</span>
-      <p class="nota">O frete é à parte: depois de receber o orçamento, a Oceamo calcula e envia as opções de PAC e Sedex.</p>
+      <p class="nota">O frete é à parte e pago no dia do envio, em PAC ou Sedex, como você preferir.</p>
       <button class="btn cheio bloq" type="button" id="gContinuar" aria-disabled="true">Continuar</button>
       <button class="lnk" type="button" data-fechar style="align-self:center">Continuar escolhendo</button>
     </div>
@@ -1647,7 +1647,7 @@ async function montarPDF(){
     didParseCell: d => { if (d.section === 'head' && d.column.index > 0) d.cell.styles.halign = 'right'; },
     didDrawCell: d => { if (d.section === 'body' || d.section === 'head'){ doc.setDrawColor(222, 214, 205); doc.setLineWidth(0.2); doc.line(d.cell.x, d.cell.y + d.cell.height, d.cell.x + d.cell.width, d.cell.y + d.cell.height); } } });
   let y = doc.lastAutoTable.finalY + 9;
-  const kv = [[`${totalPecas()} conjuntos`, brl(tot)], ['Frete (PAC ou Sedex)', ''], ['Prazo de produção', 'informado no pagamento'],
+  const kv = [[`${totalPecas()} conjuntos`, brl(tot)], ['Frete (no dia do envio)', ''], ['Prazo de produção', 'informado pelo WhatsApp'],
               ['Pagamento', forma === 'pix' ? 'Pix à vista' : `Cartão em ${state.parcelas}x sem juros`], ['Valor pago', brl(0)], ['Valor restante (sem frete)', brl(tot), true]];
   doc.setFontSize(9.5);
   kv.forEach(([k, v, forte]) => { if (y > H - 22){ doc.addPage(); y = 20; } doc.setFont('helvetica', forte ? 'bold' : 'normal'); doc.setTextColor(forte ? 43 : 110, forte ? 33 : 100, forte ? 26 : 90); doc.text(pdfTxt(k), W - 90, y); doc.setTextColor(43, 33, 26); if (v === ''){ doc.setDrawColor(150, 140, 130); doc.setLineWidth(0.25); doc.line(W - 44, y + 0.8, W - 14, y + 0.8); } else doc.text(pdfTxt(v), W - 14, y, { align:'right' }); y += 6; });
@@ -1734,14 +1734,14 @@ function gerarOrcamento(){
     <div class="doc-tot num">
       <div><span>Total de peças</span><span>${totalPecas()}</span></div>
       <div><span>Pagamento</span><span>${esc(pagTxt)}</span></div>
-      <div><span>Frete</span><span>à parte, a calcular (PAC ou Sedex)</span></div>
+      <div><span>Frete</span><span>à parte, pago no dia do envio (PAC ou Sedex)</span></div>
       <div class="grande"><span>Total dos produtos</span><strong>${brl(tot)}</strong></div>
     </div>
     <span class="moeda" data-so-lang="en es" hidden>Valores em reais (R$), moeda do Brasil.</span>
     ${D.obs ? `<div class="conds"><h3>Observações</h3><p style="margin:8px 0 0;font-size:.9rem;white-space:pre-wrap">${esc(D.obs)}</p></div>` : ''}
     <div class="conds"><h3>Condições</h3><ul>
-      <li><strong style="color:var(--cacau)">O prazo de confecção depende da quantidade de conjuntos. O prazo final é informado no pagamento, junto com o cálculo do frete;</strong></li>
-      <li>O frete é à parte. Assim que eu receber o seu orçamento, calculo o frete para o seu endereço e te envio as opções de PAC e Sedex para você escolher;</li>
+      <li><strong style="color:var(--cacau)">O prazo de confecção depende da quantidade de conjuntos. Assim que eu receber o seu orçamento, informo o prazo final junto com a estimativa de entrega dos Correios;</strong></li>
+      <li>O frete é à parte e pago somente no dia do envio. Quando os seus conjuntos estiverem prontos, entro em contato para você escolher entre PAC e Sedex;</li>
       <li><strong style="color:var(--cacau)">A produção começa após a compensação do pagamento;</strong></li>
       <li>Peças sem etiqueta de marca, só etiqueta de tamanho;</li>
       <li>Não autorizamos o uso das fotos e vídeos da Oceamo.</li>
@@ -1760,7 +1760,7 @@ function gerarOrcamento(){
     '*Cliente*', `Nome: ${D.nome}`, D.loja ? `Loja: ${D.loja}` : null, `WhatsApp: ${D.zap}`, D.email ? `E-mail: ${D.email}` : null, D.doc ? `${D.ext ? 'Documento' : 'CPF/CNPJ'}: ${D.doc}` : null, '',
     '*Itens*',
     ...linhas.map((l, i) => `${i + 1}. ${l.m.nome}, cor ${l.it.cor}${l.it.calc === PROPRIA ? '' : ', calcinha ' + l.it.calc}\n   ${gradeTxt(l.it.tam)}${l.it.obs ? '\n   Obs.: ' + l.it.obs : ''}\n   ${pecas(l.q)} × ${brl(l.u)} = ${brl(l.sub)}`),
-    '', `Total de peças: ${totalPecas()}`, `Pagamento: ${pagTxt}`, `*Total dos produtos: ${brl(tot)}*`, 'Frete: à parte. Aguardo as opções de PAC e Sedex.', '',
+    '', `Total de peças: ${totalPecas()}`, `Pagamento: ${pagTxt}`, `*Total dos produtos: ${brl(tot)}*`, 'Frete: à parte, pago no dia do envio (PAC ou Sedex). Aguardo o prazo de confecção e a estimativa de entrega.', '',
     '*Entrega*', end1, end2, end3,
     D.obs ? `\nObservações: ${D.obs}` : null,
   ].filter(x => x !== null).join('\n');
@@ -1938,7 +1938,7 @@ const I18N = {
   'Tops com aro (Mykonos, Maldivas, Amalfi e Aurora) vão do P ao G. Top e calcinha podem ser de tamanhos diferentes.': ['Underwire tops (Mykonos, Maldivas, Amalfi and Aurora) go from P to G. Top and bottom can be different sizes.', 'Los tops con aro (Mykonos, Maldivas, Amalfi y Aurora) van de la P a la G. El top y el panty pueden ser de tallas diferentes.'],
   'Pronto para a sua marca': ['Ready for your brand', 'Listo para tu marca'],
   'As peças seguem sem etiqueta de marca, apenas com etiqueta de tamanho.': ['Pieces ship without a brand label, only a size label.', 'Las piezas van sin etiqueta de marca, solo con etiqueta de talla.'],
-  'Pix à vista com o melhor preço, ou cartão em até 3x sem juros. O prazo de confecção depende da quantidade de conjuntos, e o prazo final é informado no pagamento, junto com o cálculo do frete.': ['Pix (Brazilian instant payment) for the best price, or credit card in up to 3 interest-free installments. Production time depends on the number of sets; the final timeline is given at payment, along with the shipping quote.', 'Pix (pago instantáneo de Brasil) con el mejor precio, o tarjeta de crédito hasta en 3 cuotas sin intereses. El tiempo de confección depende de la cantidad de conjuntos, y el plazo final se informa en el pago, junto con el cálculo del envío.'],
+  'Pix à vista com o melhor preço, ou cartão em até 3x sem juros. O prazo de confecção depende da quantidade de conjuntos e é informado assim que eu receber o seu orçamento, junto com a estimativa de entrega dos Correios. O frete é pago só no dia do envio.': ['Pix (Brazilian instant payment) for the best price, or credit card in up to 3 interest-free installments. Production time depends on the number of sets and is given as soon as I receive your quote, along with the Correios delivery estimate. Shipping is paid only on the day it ships.', 'Pix al contado con el mejor precio, o tarjeta en hasta 3 cuotas sin intereses. El plazo de confección depende de la cantidad de conjuntos y se informa en cuanto reciba tu presupuesto, junto con la estimación de entrega de Correios. El envío se paga solo el día del despacho.'],
   'Modelos': ['Styles', 'Modelos'],
   'Categorias': ['Categories', 'Categorías'],
   'Todos os modelos': ['All styles', 'Todos los modelos'],
@@ -1990,7 +1990,7 @@ const I18N = {
   'Estado / província': ['State / province', 'Departamento / provincia'],
   'País': ['Country', 'País'],
   'Frete à parte': ['Shipping is separate', 'Envío aparte'],
-  'O frete é à parte. Assim que eu receber o seu orçamento, calculo o frete para o seu endereço e te envio as opções de PAC e Sedex para você escolher.': ['Shipping is charged separately. As soon as I receive your quote, I calculate shipping to your address and send you the PAC and Sedex options to choose from.', 'El envío es aparte. En cuanto reciba tu cotización, calculo el envío a tu dirección y te mando las opciones de PAC y Sedex para que elijas.'],
+  'O frete é à parte e pago somente no dia do envio. Quando o seu pedido ficar pronto, entro em contato para você escolher entre PAC e Sedex.': ['Shipping is separate and paid only on the day it ships. When your order is ready, I’ll contact you so you can choose between PAC and Sedex.', 'El envío es aparte y se paga solo el día del despacho. Cuando tu pedido esté listo, te contacto para que elijas entre PAC y Sedex.'],
   'Pagamento': ['Payment', 'Pago'],
   'Forma de pagamento': ['Payment method', 'Forma de pago'],
   'Pix à vista': ['Pix (Brazilian instant payment)', 'Pix (pago instantáneo de Brasil)'],
@@ -2041,13 +2041,13 @@ const I18N = {
   'Documento': ['Document', 'Documento'],
   'e selecione o arquivo': ['and select the file', 'y selecciona el archivo'],
   'O que acontece depois': ['What happens next', 'Qué pasa después'],
-  'Assim que recebermos o seu orçamento, verificamos com a confecção o prazo de produção do seu pedido e calculamos o frete dos Correios (PAC e Sedex) para o seu endereço.': ['As soon as we receive your quote, we check the production time for your order with our workshop and calculate Correios shipping (PAC and Sedex) to your address.', 'En cuanto recibamos tu cotización, verificamos con el taller el tiempo de producción de tu pedido y calculamos el envío por Correios (PAC y Sedex) a tu dirección.'],
+  'Assim que recebermos o seu orçamento, verificamos com a confecção o prazo de produção do seu pedido e consultamos nos Correios a estimativa de entrega para o seu CEP.': ['As soon as we receive your quote, we check the production time for your order with the workshop and look up the Correios delivery estimate for your postal code.', 'En cuanto recibamos tu presupuesto, verificamos con el taller el plazo de producción de tu pedido y consultamos en Correios la estimación de entrega para tu código postal.'],
   'Como o prazo depende da quantidade de peças e da agenda da confecção,': ['Since the timeline depends on the number of pieces and the workshop schedule,', 'Como el plazo depende de la cantidad de piezas y de la agenda del taller,'],
   'só conseguimos informar o prazo depois dessa verificação': ['we can only give you the timeline after this check', 'solo podemos informarte el plazo después de esta verificación'],
-  '. Em seguida, eu entro em contato pelo WhatsApp com o prazo e as opções de frete, para combinarmos tudo antes do pagamento.': ['. Then I’ll contact you on WhatsApp with the timeline and shipping options, so we can arrange everything before payment.', '. Después, te contacto por WhatsApp con el plazo y las opciones de envío, para acordar todo antes del pago.'],
+  '. Em seguida, eu entro em contato pelo WhatsApp com o prazo de confecção e a estimativa de entrega, para combinarmos tudo antes do pagamento.': ['. Then I’ll contact you on WhatsApp with the production time and the delivery estimate, so we can settle everything before payment.', '. Luego te contacto por WhatsApp con el plazo de confección y la estimación de entrega, para acordar todo antes del pago.'],
   'O frete é pago à parte,': ['Shipping is paid separately,', 'El envío se paga aparte,'],
-  'somente quando os seus conjuntos estiverem prontos': ['only when your sets are ready', 'solo cuando tus conjuntos estén listos'],
-  ', na opção que você escolher.': [', with the option you choose.', ', en la opción que elijas.'],
+  'somente no dia do envio': ['only on the day it ships', 'solo el día del despacho'],
+  '. Quando os seus conjuntos estiverem prontos, entro em contato para você escolher entre PAC e Sedex.': ['. When your sets are ready, I’ll contact you so you can choose between PAC and Sedex.', '. Cuando tus conjuntos estén listos, te contacto para que elijas entre PAC y Sedex.'],
   'Não conseguiu enviar o PDF?': ['Couldn’t send the PDF?', '¿No pudiste enviar el PDF?'],
   'Enviar como mensagem de texto': ['Send as a text message', 'Enviar como mensaje de texto'],
   'Copiar texto': ['Copy text', 'Copiar texto'],
@@ -2067,7 +2067,7 @@ const I18N = {
   'Total': ['Total', 'Total'],
   'Total de peças': ['Total pieces', 'Total de piezas'],
   'Frete': ['Shipping', 'Envío'],
-  'à parte, a calcular (PAC ou Sedex)': ['separate, to be calculated (PAC or Sedex)', 'aparte, por calcular (PAC o Sedex)'],
+  'à parte, pago no dia do envio (PAC ou Sedex)': ['separate, paid on the day it ships (PAC or Sedex)', 'aparte, se paga el día del despacho (PAC o Sedex)'],
   'Total dos produtos': ['Products total', 'Total de los productos'],
   'Observações': ['Notes', 'Observaciones'],
   'Condições': ['Terms', 'Condiciones'],
@@ -2084,8 +2084,8 @@ const I18N = {
   'banho cataforético, mais resistente ao cloro, à água do mar e ao desgaste, que preserva o brilho por muito mais tempo;': ['cataphoretic coating, more resistant to chlorine, seawater and wear, keeping its shine much longer;', 'baño cataforético, más resistente al cloro, al agua de mar y al desgaste, que conserva el brillo por mucho más tiempo;'],
   'Excelente margem para revenda:': ['Excellent resale margin:', 'Excelente margen de reventa:'],
   'preços de atacado reais, com espaço de lucro para você precificar com segurança e fazer o seu negócio crescer.': ['true wholesale prices, with room for profit so you can set your prices with confidence and grow your business.', 'precios mayoristas reales, con margen de ganancia para que fijes tus precios con seguridad y hagas crecer tu negocio.'],
-  'O prazo de confecção depende da quantidade de conjuntos. O prazo final é informado no pagamento, junto com o cálculo do frete;': ['Production time depends on the number of sets. The final timeline is given at payment, along with the shipping quote;', 'El tiempo de confección depende de la cantidad de conjuntos. El plazo final se informa en el pago, junto con el cálculo del envío;'],
-  'O frete é à parte. Assim que eu receber o seu orçamento, calculo o frete para o seu endereço e te envio as opções de PAC e Sedex para você escolher;': ['Shipping is separate. As soon as I receive your quote, I calculate shipping to your address and send you the PAC and Sedex options to choose from;', 'El envío es aparte. En cuanto reciba tu cotización, calculo el envío a tu dirección y te mando las opciones de PAC y Sedex para que elijas;'],
+  'O prazo de confecção depende da quantidade de conjuntos. Assim que eu receber o seu orçamento, informo o prazo final junto com a estimativa de entrega dos Correios;': ['Production time depends on the number of sets. As soon as I receive your quote, I’ll give you the final timeline along with the Correios delivery estimate;', 'El plazo de confección depende de la cantidad de conjuntos. En cuanto reciba tu presupuesto, te informo el plazo final junto con la estimación de entrega de Correios;'],
+  'O frete é à parte e pago somente no dia do envio. Quando os seus conjuntos estiverem prontos, entro em contato para você escolher entre PAC e Sedex;': ['Shipping is separate and paid only on the day it ships. When your sets are ready, I’ll contact you so you can choose between PAC and Sedex;', 'El envío es aparte y se paga solo el día del despacho. Cuando tus conjuntos estén listos, te contacto para que elijas entre PAC y Sedex;'],
   'A produção começa após a compensação do pagamento;': ['Production starts once payment clears;', 'La producción empieza cuando se confirma el pago;'],
   'Nossos tops têm design exclusivo e alças reguláveis nos ombros e nas costas, para um ajuste perfeito ao corpo. Acessórios banhados a ouro 24K com banho cataforético, mais resistentes ao cloro, à água do mar e ao desgaste;': ['Our tops have an exclusive design and adjustable straps at the shoulders and back, for a perfect fit. Hardware is 24K gold plated with cataphoretic coating, more resistant to chlorine, seawater and wear;', 'Nuestros tops tienen diseño exclusivo y tiras regulables en los hombros y en la espalda, para un ajuste perfecto al cuerpo. Accesorios bañados en oro de 24K con baño cataforético, más resistentes al cloro, al agua de mar y al desgaste;'],
   'Peças sem etiqueta de marca, só etiqueta de tamanho;': ['No brand label, only a size label;', 'Piezas sin etiqueta de marca, solo etiqueta de talla;'],
@@ -2164,7 +2164,7 @@ const I18N = {
   /* pedido (gaveta) */
   'Total no Pix ': ['Total with Pix', 'Total con Pix'],
   'No cartão': ['By card', 'Con tarjeta'],
-  'O frete é à parte: depois de receber o orçamento, a Oceamo calcula e envia as opções de PAC e Sedex.': ['Shipping is separate: after receiving the quote, Oceamo calculates it and sends the PAC and Sedex options.', 'El envío es aparte: al recibir la cotización, Oceamo lo calcula y envía las opciones de PAC y Sedex.'],
+  'O frete é à parte e pago no dia do envio, em PAC ou Sedex, como você preferir.': ['Shipping is separate and paid on the day it ships, by PAC or Sedex, whichever you prefer.', 'El envío es aparte y se paga el día del despacho, por PAC o Sedex, como prefieras.'],
   'Continuar': ['Continue', 'Continuar'],
   'Continuar escolhendo': ['Keep shopping', 'Seguir eligiendo'],
   'Remover': ['Remove', 'Quitar'],
