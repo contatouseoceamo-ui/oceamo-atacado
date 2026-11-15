@@ -80,6 +80,12 @@ h1,h2,h3{text-wrap:balance}
 .topo{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:var(--creme);border-bottom:1px solid var(--fio)}
 .topo-in{height:var(--hh);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px}
 .topo-esq{font-size:.82rem;color:var(--suave)}
+.topo-l{display:flex;align-items:center;gap:16px;min-width:0}
+.idioma{display:inline-flex;align-items:center;gap:2px;padding:3px 4px 3px 8px;border:1px solid var(--fio);border-radius:999px;background:var(--areia);color:var(--cacau)}
+.idioma svg{width:15px;height:15px;flex:none;margin-right:3px;color:var(--caramelo-esc)}
+.idioma button{border:0;background:none;padding:5px 8px;border-radius:999px;font:inherit;font-size:.74rem;font-weight:500;letter-spacing:.06em;color:var(--suave);line-height:1}
+.idioma button:hover{color:var(--cacau)}
+.idioma button[aria-pressed="true"]{background:var(--caramelo-esc);color:var(--areia)}
 .marca{background:none;border:0;padding:0 0 0 .34em;font-family:var(--display);font-weight:500;font-size:1.5rem;letter-spacing:.34em;color:var(--cacau)}
 .sacola{justify-self:end;display:inline-flex;align-items:center;gap:10px;border:1px solid var(--fio);background:var(--areia);border-radius:999px;padding:8px 16px;font-size:.86rem;color:var(--cacau)}
 .sacola:hover{border-color:var(--caramelo-esc)}
@@ -555,6 +561,20 @@ h1,h2,h3{text-wrap:balance}
 .env-depois h3{margin:0 0 6px;font-family:var(--display);font-weight:500;font-size:1.05rem;color:var(--cacau)}
 .env-depois p{margin:6px 0 0;font-size:.86rem;line-height:1.55;color:var(--texto)}
 .env-depois strong{color:var(--cacau)}
+.moeda{display:block;margin-top:8px;font-size:.78rem;color:var(--suave)}
+.capa .moeda{margin-top:-6px;margin-bottom:18px;color:var(--areia);opacity:.85}
+.guia-tr{padding:6px 24px 20px;color:var(--texto);font-size:.88rem;line-height:1.55}
+.guia-tr p{margin:0 0 12px}
+.guia-tr h3{margin:18px 0 8px;font-family:var(--display);font-weight:500;font-size:1.2rem;color:var(--cacau)}
+.guia-tr table{width:100%;border-collapse:collapse}
+.guia-tr th{text-align:left;font-weight:500;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--suave);padding:6px 4px;border-bottom:1px solid var(--cacau)}
+.guia-tr td{padding:9px 4px;border-bottom:1px solid var(--fio)}
+.guia-tr td:first-child{font-family:var(--display);font-size:1.05rem;color:var(--cacau)}
+.guia-tr small{font-family:var(--sans);font-size:.72rem;color:var(--suave)}
+.guia-tr ul{margin:0;padding-left:18px}
+.guia-tr li{margin:4px 0}
+.guia-nota{font-size:.8rem;color:var(--suave);margin-top:10px!important}
+.ext{margin:4px 0 22px;padding:12px 16px;border:1px solid var(--fio);border-radius:6px;background:var(--areia);width:auto}
 .env-alt{margin:20px 0 0;padding-top:14px;border-top:1px solid var(--fio);font-size:.84rem;color:var(--suave)}
 .env-alt .lnk{font-size:inherit}
 @media (max-width:560px){.envio{padding:18px 16px}.env-btn{width:100%;padding:0 14px;font-size:.9rem}.env-n{margin-top:11px}.env-passos li{gap:10px}}
@@ -577,8 +597,13 @@ h1,h2,h3{text-wrap:balance}
   .capa-foto{display:none}
   .capa-txt{margin-left:0;padding-block:44px 48px}
   .faixa{font-size:.74rem}
-  .topo-in{grid-template-columns:1fr auto}
+  .topo-in{grid-template-columns:auto 1fr auto;gap:8px}
   .topo-esq{display:none}
+  .topo .marca{order:-1}
+  .topo-l{justify-self:end}
+  .idioma{padding:2px 3px 2px 6px}
+  .idioma svg{display:none}
+  .idioma button{padding:5px 6px;font-size:.7rem}
   .topo .marca{justify-self:start;padding-left:0;font-size:1.25rem}
   .sacola{padding:8px 14px;white-space:nowrap}
   .sacola .s-txt{display:none}
@@ -593,10 +618,13 @@ h1,h2,h3{text-wrap:balance}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 
-<div class="faixa"><div class="wrap">Pedido mínimo de 12 peças, combinando modelos, cores e tamanhos</div></div>
+<div class="faixa"><div class="wrap">Pedido mínimo de 12 peças, combinando modelos, cores e tamanhos<span class="moeda-faixa" data-so-lang="en es" hidden> · Valores em reais (R$), moeda do Brasil.</span></div></div>
 <header class="topo">
   <div class="wrap topo-in">
-    <span class="topo-esq">Atacado 2027</span>
+    <div class="topo-l">
+      <span class="topo-esq">Atacado 2027</span>
+      <div class="idioma" role="group" aria-label="Idioma · Language · Idioma" data-noi18n><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.4 3.6 5.2 3.6 8.5s-1.2 6.1-3.6 8.5c-2.4-2.4-3.6-5.2-3.6-8.5S9.6 5.9 12 3.5z"/></svg><button type="button" data-lang="pt" aria-pressed="true" aria-label="Português" title="Português">PT</button><button type="button" data-lang="en" aria-pressed="false" aria-label="English" title="English">EN</button><button type="button" data-lang="es" aria-pressed="false" aria-label="Español" title="Español">ES</button></div>
+    </div>
     <button class="marca" type="button" data-ir="loja" aria-label="Oceamo, voltar aos modelos">OCEAMO</button>
     <button class="sacola" type="button" id="btnPedido" aria-label="Abrir pedido">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
@@ -615,6 +643,7 @@ h1,h2,h3{text-wrap:balance}
         <h1>Primavera Verão 2027</h1>
         <p class="capa-tag">peças que vendem sozinhas</p>
         <p class="capa-corpo">Escolha o modelo, a cor, a calcinha e os tamanhos. No final, você recebe o orçamento pronto para enviar pelo WhatsApp.</p>
+        <span class="moeda" data-so-lang="en es" hidden>Valores em reais (R$), moeda do Brasil.</span>
         <div class="capa-acoes">
           <a class="btn claro" href="#modelos">Ver os modelos</a>
           <a class="lnk" href="#como-funciona">Como funciona</a>
@@ -667,6 +696,7 @@ h1,h2,h3{text-wrap:balance}
       <form id="form" novalidate>
         <h1>Seus dados</h1>
         <p class="dados-intro">Essas informações vão no orçamento e na mensagem do WhatsApp.</p>
+        <label class="dif ext" for="fExt"><input type="checkbox" id="fExt">Moro fora do Brasil</label>
 
         <div class="sec">
           <h2>Contato</h2>
@@ -689,6 +719,7 @@ h1,h2,h3{text-wrap:balance}
             <div class="campo c2"><label for="fBairro">Bairro</label><input id="fBairro" required><span class="err"></span></div>
             <div class="campo c2 meia"><label for="fCidade">Cidade</label><input id="fCidade" autocomplete="address-level2" required><span class="err"></span></div>
             <div class="campo c2 meia"><label for="fUf">UF</label><input id="fUf" maxlength="2" autocomplete="address-level1" required><span class="err"></span></div>
+            <div class="campo c2" id="cPais" hidden><label for="fPais">País</label><input id="fPais" autocomplete="country-name"><span class="err"></span></div>
           </div>
           <p class="dica" id="cepMsg" hidden></p>
           <div class="frete-nota">
@@ -721,6 +752,7 @@ h1,h2,h3{text-wrap:balance}
         <ul class="r-lista" id="rLista"></ul>
         <div class="r-sub"><span>Peças</span><span class="num" id="rPecas">0</span></div>
         <div class="r-tot"><span id="rTotLbl">Total no Pix</span><strong class="num" id="rTot">R$ 0</strong></div>
+        <span class="moeda" data-so-lang="en es" hidden>Valores em reais (R$), moeda do Brasil.</span>
       </aside>
     </div>
   </div>
@@ -806,6 +838,7 @@ h1,h2,h3{text-wrap:balance}
             <span class="pn-cartao num"><small>Cartão</small><span id="pnCartao"></span></span>
             <span class="pn-sug num"><small>Sugestão de venda</small><span id="pnSugV"></span></span>
           </div>
+          <span class="moeda" data-so-lang="en es" hidden>Valores em reais (R$), moeda do Brasil.</span>
         </div>
         <div>
           <div class="pn-rot"><h3>Cor</h3><span id="pnCorNome"></span></div>
@@ -848,6 +881,7 @@ h1,h2,h3{text-wrap:balance}
         <div class="pix"><span>Total no Pix</span><strong class="num" id="gPix">R$ 0</strong></div>
         <div class="cartao"><span>No cartão</span><span class="num" id="gCartao">R$ 0</span></div>
       </div>
+      <span class="moeda" data-so-lang="en es" hidden>Valores em reais (R$), moeda do Brasil.</span>
       <p class="nota">O frete é à parte: depois de receber o orçamento, a Oceamo calcula e envia as opções de PAC e Sedex.</p>
       <button class="btn cheio bloq" type="button" id="gContinuar" aria-disabled="true">Continuar</button>
       <button class="lnk" type="button" data-fechar style="align-self:center">Continuar escolhendo</button>
@@ -883,7 +917,27 @@ h1,h2,h3{text-wrap:balance}
       <h2 id="mdTit">Guia de medidas</h2>
       <button class="x" type="button" data-fechar aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
     </div>
-    <div class="f-corpo guia"><img src="fotos/guia-de-medidas.jpg" alt="Guia de medidas Oceamo: tabela de top (busto) e de calcinha (cintura e quadril) nos tamanhos P, M, G e GG, e como medir"></div>
+    <div class="f-corpo guia"><div class="guia-tr" data-so-lang="en" hidden data-noi18n>
+        <p>Every body is unique and fit can vary with body shape. Use the table as a reference and choose the top and bottom in your size. P, M, G and GG are Brazilian sizes.</p>
+        <h3>Top</h3>
+        <table><thead><tr><th>Size</th><th>Bust</th></tr></thead><tbody><tr><td>P <small>(36–38)</small></td><td>81–88 cm</td></tr><tr><td>M <small>(40–42)</small></td><td>89–96 cm</td></tr><tr><td>G <small>(44)</small></td><td>97–100 cm</td></tr><tr><td>GG <small>(46)</small></td><td>101–105 cm</td></tr></tbody></table>
+        <h3>Bottom</h3>
+        <table><thead><tr><th>Size</th><th>Waist</th><th>Hips</th></tr></thead><tbody><tr><td>P <small>(34–36)</small></td><td>58–63 cm</td><td>86–93 cm</td></tr><tr><td>M <small>(38–40)</small></td><td>64–74 cm</td><td>94–105 cm</td></tr><tr><td>G <small>(42–44)</small></td><td>75–81 cm</td><td>106–110 cm</td></tr><tr><td>GG <small>(46)</small></td><td>82–88 cm</td><td>111–115 cm</td></tr></tbody></table>
+        <p class="guia-nota">Measurements in centimeters. Underwire tops (Mykonos, Maldivas, Amalfi and Aurora) go from P to G.</p>
+        <h3>How to measure</h3>
+        <ul><li><b>Bust:</b> at the fullest part of the bust, tape straight across the back.</li><li><b>Waist:</b> at the narrowest part of the torso, above the belly button.</li><li><b>Hips:</b> at the widest part of the bum, feet together.</li></ul>
+        <p class="guia-nota">The model is wearing M.</p>
+      </div><div class="guia-tr" data-so-lang="es" hidden data-noi18n>
+        <p>Cada cuerpo es único y el ajuste puede variar según la anatomía. Usa la tabla como referencia y elige el top y el panty en tu talla. P, M, G y GG son tallas brasileñas.</p>
+        <h3>Top</h3>
+        <table><thead><tr><th>Talla</th><th>Busto</th></tr></thead><tbody><tr><td>P <small>(36–38)</small></td><td>81–88 cm</td></tr><tr><td>M <small>(40–42)</small></td><td>89–96 cm</td></tr><tr><td>G <small>(44)</small></td><td>97–100 cm</td></tr><tr><td>GG <small>(46)</small></td><td>101–105 cm</td></tr></tbody></table>
+        <h3>Panty</h3>
+        <table><thead><tr><th>Talla</th><th>Cintura</th><th>Cadera</th></tr></thead><tbody><tr><td>P <small>(34–36)</small></td><td>58–63 cm</td><td>86–93 cm</td></tr><tr><td>M <small>(38–40)</small></td><td>64–74 cm</td><td>94–105 cm</td></tr><tr><td>G <small>(42–44)</small></td><td>75–81 cm</td><td>106–110 cm</td></tr><tr><td>GG <small>(46)</small></td><td>82–88 cm</td><td>111–115 cm</td></tr></tbody></table>
+        <p class="guia-nota">Medidas en centímetros. Los tops con aro (Mykonos, Maldivas, Amalfi y Aurora) van de la P a la G.</p>
+        <h3>Cómo medir</h3>
+        <ul><li><b>Busto:</b> en la parte más llena del busto, con la cinta recta en la espalda.</li><li><b>Cintura:</b> en la parte más delgada del torso, arriba del ombligo.</li><li><b>Cadera:</b> en la parte más ancha de la cola, con los pies juntos.</li></ul>
+        <p class="guia-nota">La modelo usa talla M.</p>
+      </div><img src="fotos/guia-de-medidas.jpg" alt="Guia de medidas Oceamo: tabela de top (busto) e de calcinha (cintura e quadril) nos tamanhos P, M, G e GG, e como medir"></div>
     </div>
 </div>
 
@@ -1461,25 +1515,41 @@ function renderResumo(){
 $$('input[name="pag"]').forEach(r => r.addEventListener('change', () => { state.pagamento = r.value; salvar(); renderResumo(); }));
 $('#fParc').addEventListener('change', e => { state.parcelas = +e.target.value; salvar(); renderResumo(); });
 
-const CAMPOS = { nome:'#fNome', loja:'#fLoja', zap:'#fZap', email:'#fEmail', doc:'#fDoc', cep:'#fCep', rua:'#fRua', num:'#fNum', comp:'#fComp', bairro:'#fBairro', cidade:'#fCidade', uf:'#fUf', obs:'#fObs' };
+const CAMPOS = { nome:'#fNome', loja:'#fLoja', zap:'#fZap', email:'#fEmail', doc:'#fDoc', cep:'#fCep', rua:'#fRua', num:'#fNum', comp:'#fComp', bairro:'#fBairro', cidade:'#fCidade', uf:'#fUf', pais:'#fPais', obs:'#fObs' };
 Object.entries(CAMPOS).forEach(([k, s]) => { if (state.dados[k]) $(s).value = state.dados[k]; });
+/* cliente de fora do Brasil: documento, código postal, estado e país livres */
+const ehExt = () => !!state.dados.ext;
+function aplicarExt(){
+  const x = ehExt(); $('#fExt').checked = x; $('#cPais').hidden = !x;
+  const rot = (id, t) => { $(`label[for="${id}"]`).textContent = t; };
+  rot('fZap', x ? 'WhatsApp com código do país' : 'WhatsApp com DDD'); $('#fZap').placeholder = x ? '+57 300 000 0000' : '(00) 00000-0000';
+  rot('fDoc', x ? 'Documento (passaporte ou identidade)' : 'CPF ou CNPJ'); $('#fDoc').inputMode = x ? 'text' : 'numeric';
+  rot('fCep', x ? 'Código postal (opcional)' : 'CEP'); $('#fCep').placeholder = x ? '' : '00000-000'; $('#fCep').inputMode = x ? 'text' : 'numeric';
+  rot('fBairro', x ? 'Bairro (opcional)' : 'Bairro');
+  rot('fUf', x ? 'Estado / província' : 'UF'); if (x) $('#fUf').removeAttribute('maxlength'); else $('#fUf').maxLength = 2;
+  $('#cepMsg').hidden = true;
+  $$('#form .campo.mal').forEach(c => { c.classList.remove('mal'); const er = c.querySelector('.err'); if (er) er.textContent = ''; });
+}
+$('#fExt').addEventListener('change', e => { state.dados.ext = e.target.checked; salvar(); aplicarExt(); });
+aplicarExt();
 $('#form').addEventListener('input', e => {
   const el = e.target;
-  if (el.id === 'fZap'){
+  if (el.id === 'fZap' && !ehExt()){
     const d = el.value.replace(/\D/g, '').slice(0, 11);
     el.value = d.length > 10 ? d.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3') : d.length > 6 ? d.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3') : d.length > 2 ? d.replace(/(\d{2})(\d*)/, '($1) $2') : d;
   }
-  if (el.id === 'fCep'){
+  if (el.id === 'fCep' && !ehExt()){
     const d = el.value.replace(/\D/g, '').slice(0, 8);
     el.value = d.length > 5 ? d.slice(0, 5) + '-' + d.slice(5) : d;
     if (d.length === 8) buscaCep(d);
   }
-  if (el.id === 'fDoc'){
+  if (el.id === 'fDoc' && !ehExt()){
     const d = el.value.replace(/\D/g, '').slice(0, 14);
     el.value = d.length > 11 ? d.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{0,2})/, '$1.$2.$3/$4-$5') : d.length > 9 ? d.replace(/(\d{3})(\d{3})(\d{3})(\d{0,2})/, '$1.$2.$3-$4') : d.length > 6 ? d.replace(/(\d{3})(\d{3})(\d{0,3})/, '$1.$2.$3') : d.length > 3 ? d.replace(/(\d{3})(\d{0,3})/, '$1.$2') : d;
   }
-  if (el.id === 'fUf') el.value = el.value.toUpperCase();
+  if (el.id === 'fUf' && !ehExt()) el.value = el.value.toUpperCase();
   const campo = el.closest('.campo'); if (campo){ campo.classList.remove('mal'); const er = campo.querySelector('.err'); if (er) er.textContent = ''; }
+  if (el.id === 'fExt') return;
   Object.entries(CAMPOS).forEach(([k, s]) => state.dados[k] = $(s).value);
   salvar();
 });
@@ -1495,13 +1565,16 @@ async function buscaCep(cep){
 }
 function validar(){
   let ok = true;
-  const req = { nome:'Informe seu nome completo.', loja:'Informe o nome da sua loja ou o @.', zap:'Informe o WhatsApp com DDD.', doc:'Informe o CPF (11 números) ou o CNPJ (14 números).', cep:'Informe o CEP com 8 números.', rua:'Informe o endereço.', num:'Informe o número.', bairro:'Informe o bairro.', cidade:'Informe a cidade.', uf:'Informe a UF com 2 letras.' };
+  const x = ehExt();
+  const req = x
+    ? { nome:'Informe seu nome completo.', loja:'Informe o nome da sua loja ou o @.', zap:'Informe o WhatsApp com o código do país.', doc:'Informe um documento (passaporte ou identidade).', rua:'Informe o endereço.', num:'Informe o número.', cidade:'Informe a cidade.', uf:'Informe o estado ou a província.', pais:'Informe o país.' }
+    : { nome:'Informe seu nome completo.', loja:'Informe o nome da sua loja ou o @.', zap:'Informe o WhatsApp com DDD.', doc:'Informe o CPF (11 números) ou o CNPJ (14 números).', cep:'Informe o CEP com 8 números.', rua:'Informe o endereço.', num:'Informe o número.', bairro:'Informe o bairro.', cidade:'Informe a cidade.', uf:'Informe a UF com 2 letras.' };
   Object.entries(req).forEach(([k, m]) => {
     const el = $(CAMPOS[k]); let mal = !el.value.trim();
-    if (k === 'zap') mal = el.value.replace(/\D/g, '').length < 10;
+    if (k === 'zap') mal = el.value.replace(/\D/g, '').length < (x ? 8 : 10);
     if (k === 'cep') mal = el.value.replace(/\D/g, '').length !== 8;
-    if (k === 'doc') mal = ![11, 14].includes(el.value.replace(/\D/g, '').length);
-    if (k === 'uf') mal = !/^[A-Z]{2}$/.test(el.value.trim());
+    if (k === 'doc' && !x) mal = ![11, 14].includes(el.value.replace(/\D/g, '').length);
+    if (k === 'uf' && !x) mal = !/^[A-Z]{2}$/.test(el.value.trim());
     const c = el.closest('.campo'); c.classList.toggle('mal', mal); c.querySelector('.err').textContent = mal ? m : '';
     if (mal && ok){ ok = false; el.focus(); }
   });
@@ -1568,8 +1641,8 @@ async function montarPDF(){
   y += 8; if (y > H - 60){ doc.addPage(); y = 20; }
   doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5); doc.setTextColor(140, 120, 100); doc.text(pdfTxt('DADOS DA CLIENTE'), 14, y, { charSpace:0.5 });
   doc.setDrawColor(222, 214, 205); doc.setLineWidth(0.2); doc.line(14, y + 2, W - 14, y + 2); y += 8;
-  const end = `${D.rua}, ${D.num}${D.comp ? ', ' + D.comp : ''} - ${D.bairro}, ${D.cidade}/${D.uf} - CEP ${D.cep}`;
-  const dados = [['Nome', D.nome], ['Loja', D.loja], ['WhatsApp', D.zap], ['E-mail', D.email], ['CPF/CNPJ', D.doc], ['Endereço', end], ['Observações', D.obs]].filter(([, v]) => v && String(v).trim());
+  const end = D.ext ? `${D.rua}, ${D.num}${D.comp ? ', ' + D.comp : ''}${D.bairro ? ' - ' + D.bairro : ''}, ${D.cidade}/${D.uf}${D.cep ? ' - Código postal ' + D.cep : ''} - ${D.pais}` : `${D.rua}, ${D.num}${D.comp ? ', ' + D.comp : ''} - ${D.bairro}, ${D.cidade}/${D.uf} - CEP ${D.cep}`;
+  const dados = [['Nome', D.nome], ['Loja', D.loja], ['WhatsApp', D.zap], ['E-mail', D.email], [D.ext ? 'Documento' : 'CPF/CNPJ', D.doc], ['Endereço', end], ['Observações', D.obs]].filter(([, v]) => v && String(v).trim());
   doc.setFontSize(9);
   dados.forEach(([k, v]) => { const ls = doc.splitTextToSize(pdfTxt(v), W - 14 - 46); if (y + ls.length * 4.6 > H - 18){ doc.addPage(); y = 20; }
     doc.setTextColor(110, 100, 90); doc.text(pdfTxt(k), 14, y); doc.setTextColor(43, 33, 26); doc.text(ls, 46, y); y += Math.max(1, ls.length) * 4.6 + 1.6; });
@@ -1625,7 +1698,8 @@ function gerarOrcamento(){
   const linhas = state.itens.map(it => { const m = M(it.mid), q = soma(it.tam), u = preco(m, forma); return { m, it, q, u, sub: q * u }; });
   const pagTxt = forma === 'pix' ? 'Pix à vista' : `Cartão de crédito, ${state.parcelas}x de ${brl(tot / state.parcelas)} sem juros (link de pagamento)`;
   const end1 = `${D.rua}, ${D.num}${D.comp ? ', ' + D.comp : ''}`;
-  const end2 = `${D.bairro}, ${D.cidade}/${D.uf}`;
+  const end2 = `${D.bairro ? D.bairro + ', ' : ''}${D.cidade}/${D.uf}`;
+  const end3 = D.ext ? `${D.cep ? 'Código postal ' + D.cep + ' · ' : ''}${D.pais}` : `CEP ${D.cep}`;
 
   $('#papel').innerHTML = `
     <div class="doc-cab">
@@ -1636,9 +1710,9 @@ function gerarOrcamento(){
     <div class="doc-cols">
       <div><h3>Cliente</h3>
         <p><strong>${esc(D.nome)}</strong></p>${D.loja ? `<p>${esc(D.loja)}</p>` : ''}
-        <p class="num">WhatsApp ${esc(D.zap)}</p>${D.email ? `<p>${esc(D.email)}</p>` : ''}${D.doc ? `<p class="num">CPF/CNPJ ${esc(D.doc)}</p>` : ''}
+        <p class="num">WhatsApp ${esc(D.zap)}</p>${D.email ? `<p>${esc(D.email)}</p>` : ''}${D.doc ? `<p class="num">${D.ext ? 'Documento' : 'CPF/CNPJ'} ${esc(D.doc)}</p>` : ''}
       </div>
-      <div><h3>Endereço de entrega</h3><p>${esc(end1)}</p><p>${esc(end2)}</p><p class="num">CEP ${esc(D.cep)}</p></div>
+      <div><h3>Endereço de entrega</h3><p>${esc(end1)}</p><p>${esc(end2)}</p><p class="num">${esc(end3)}</p></div>
     </div>
     <div class="tbl"><table>
       <thead><tr><th>Modelo</th><th>Cor</th><th>Calcinha</th><th>Tamanhos</th><th class="r">Peças</th><th class="r">Unitário</th><th class="r">Total</th></tr></thead>
@@ -1650,6 +1724,7 @@ function gerarOrcamento(){
       <div><span>Frete</span><span>à parte, a calcular (PAC ou Sedex)</span></div>
       <div class="grande"><span>Total dos produtos</span><strong>${brl(tot)}</strong></div>
     </div>
+    <span class="moeda" data-so-lang="en es" hidden>Valores em reais (R$), moeda do Brasil.</span>
     ${D.obs ? `<div class="conds"><h3>Observações</h3><p style="margin:8px 0 0;font-size:.9rem;white-space:pre-wrap">${esc(D.obs)}</p></div>` : ''}
     <div class="conds"><h3>Condições</h3><ul>
       <li><strong style="color:var(--cacau)">O prazo de confecção depende da quantidade de conjuntos. O prazo final é informado no pagamento, junto com o cálculo do frete;</strong></li>
@@ -1662,11 +1737,11 @@ function gerarOrcamento(){
 
   const txt = [
     '*Orçamento de atacado Oceamo*', `${nro}, ${orc.data}`, '',
-    '*Cliente*', `Nome: ${D.nome}`, D.loja ? `Loja: ${D.loja}` : null, `WhatsApp: ${D.zap}`, D.email ? `E-mail: ${D.email}` : null, D.doc ? `CPF/CNPJ: ${D.doc}` : null, '',
+    '*Cliente*', `Nome: ${D.nome}`, D.loja ? `Loja: ${D.loja}` : null, `WhatsApp: ${D.zap}`, D.email ? `E-mail: ${D.email}` : null, D.doc ? `${D.ext ? 'Documento' : 'CPF/CNPJ'}: ${D.doc}` : null, '',
     '*Itens*',
     ...linhas.map((l, i) => `${i + 1}. ${l.m.nome}, cor ${l.it.cor}${l.it.calc === PROPRIA ? '' : ', calcinha ' + l.it.calc}\n   ${gradeTxt(l.it.tam)}${l.it.obs ? '\n   Obs.: ' + l.it.obs : ''}\n   ${pecas(l.q)} × ${brl(l.u)} = ${brl(l.sub)}`),
     '', `Total de peças: ${totalPecas()}`, `Pagamento: ${pagTxt}`, `*Total dos produtos: ${brl(tot)}*`, 'Frete: à parte. Aguardo as opções de PAC e Sedex.', '',
-    '*Entrega*', end1, end2, `CEP ${D.cep}`,
+    '*Entrega*', end1, end2, end3,
     D.obs ? `\nObservações: ${D.obs}` : null,
   ].filter(x => x !== null).join('\n');
   orc.txt = txt; Object.assign(orc, { D, forma, tot, linhas });
@@ -1805,6 +1880,421 @@ function toast(m){ const t = $('#toast'); t.textContent = m; t.hidden = false; c
 
 /* ---------- início ---------- */
 renderCatalogo(); atualizar(); ir('loja');
+</script>
+<script>
+/* =============================================================
+   IDIOMAS — português (padrão), inglês (EUA) e espanhol.
+   O site é escrito em português; esta parte traduz o que aparece
+   na tela. O PDF e a mensagem do WhatsApp continuam em português,
+   porque são lidos pela Oceamo.
+   Para corrigir uma tradução: procure o texto em português abaixo
+   e troque o inglês [0] ou o espanhol [1].
+   ============================================================= */
+const I18N = {
+  /* topo, capa e regras */
+  'Pedido mínimo de 12 peças, combinando modelos, cores e tamanhos': ['12-piece minimum order, mixing styles, colors and sizes', 'Pedido mínimo de 12 piezas, combinando modelos, colores y tallas'],
+  'Valores em reais (R$), moeda do Brasil.': ['Prices in Brazilian reais (R$ · BRL).', 'Precios en reales brasileños (R$ · BRL).'],
+  '· Valores em reais (R$), moeda do Brasil.': ['· Prices in Brazilian reais (R$ · BRL).', '· Precios en reales brasileños (R$ · BRL).'],
+  'Guia de medidas Oceamo: tabela de top (busto) e de calcinha (cintura e quadril) nos tamanhos P, M, G e GG, e como medir': ['Oceamo size guide: top (bust) and bottom (waist and hips) table in sizes P, M, G and GG, and how to measure', 'Guía de medidas Oceamo: tabla de top (busto) y de panty (cintura y cadera) en las tallas P, M, G y GG, y cómo medir'],
+  'Atacado 2027': ['Wholesale 2027', 'Mayorista 2027'],
+  'Oceamo, voltar aos modelos': ['Oceamo, back to styles', 'Oceamo, volver a los modelos'],
+  'Abrir pedido': ['Open order', 'Abrir pedido'],
+  'Pedido': ['Order', 'Pedido'],
+  'Exclusivo para revendedoras': ['Exclusively for resellers', 'Exclusivo para revendedoras'],
+  'Atacado': ['Wholesale', 'Mayorista'],
+  'Primavera Verão 2027': ['Spring Summer 2027', 'Primavera Verano 2027'],
+  'peças que vendem sozinhas': ['pieces that sell themselves', 'piezas que se venden solas'],
+  'Escolha o modelo, a cor, a calcinha e os tamanhos. No final, você recebe o orçamento pronto para enviar pelo WhatsApp.': ['Choose the style, the color, the bottom and the sizes. At the end, you get a quote ready to send via WhatsApp.', 'Elige el modelo, el color, el panty y las tallas. Al final, recibes la cotización lista para enviar por WhatsApp.'],
+  'Ver os modelos': ['See the styles', 'Ver los modelos'],
+  'Como funciona': ['How it works', 'Cómo funciona'],
+  'Biquíni Mykonos na cor verde esmeralda': ['Mykonos bikini in emerald green', 'Bikini Mykonos en verde esmeralda'],
+  'Como funciona o atacado': ['How wholesale works', 'Cómo funciona la venta al por mayor'],
+  'Pedido mínimo de 12 peças': ['12-piece minimum order', 'Pedido mínimo de 12 piezas'],
+  'Combine modelos, cores e tamanhos como preferir para montar a sua grade.': ['Mix styles, colors and sizes however you like to build your assortment.', 'Combina modelos, colores y tallas como prefieras para armar tu surtido.'],
+  'Preço pelo modelo do top': ['Price set by the top style', 'Precio según el modelo del top'],
+  'Calcinha, cor e tamanho são de escolha livre, sem nenhum custo adicional.': ['Bottom, color and size are your choice, at no extra cost.', 'Panty, color y talla son de libre elección, sin ningún costo adicional.'],
+  'Tamanhos do P ao GG': ['Sizes P to GG', 'Tallas de la P a la GG'],
+  'Tops com aro (Mykonos, Maldivas, Amalfi e Aurora) vão do P ao G. Top e calcinha podem ter numerações diferentes.': ['Underwire tops (Mykonos, Maldivas, Amalfi and Aurora) go from P to G. Top and bottom can be different sizes.', 'Los tops con aro (Mykonos, Maldivas, Amalfi y Aurora) van de la P a la G. El top y el panty pueden ser de tallas diferentes.'],
+  'Pronto para a sua marca': ['Ready for your brand', 'Listo para tu marca'],
+  'As peças seguem sem etiqueta de marca, apenas com etiqueta de tamanho.': ['Pieces ship without a brand label, only a size label.', 'Las piezas van sin etiqueta de marca, solo con etiqueta de talla.'],
+  'Pix à vista com o melhor preço, ou cartão em até 3x sem juros. O prazo de confecção depende da quantidade de conjuntos, e o prazo final é informado no pagamento, junto com o cálculo do frete.': ['Pix (Brazilian instant payment) for the best price, or credit card in up to 3 interest-free installments. Production time depends on the number of sets; the final timeline is given at payment, along with the shipping quote.', 'Pix (pago instantáneo de Brasil) con el mejor precio, o tarjeta de crédito hasta en 3 cuotas sin intereses. El tiempo de confección depende de la cantidad de conjuntos, y el plazo final se informa en el pago, junto con el cálculo del envío.'],
+  'Modelos': ['Styles', 'Modelos'],
+  'Categorias': ['Categories', 'Categorías'],
+  'Todos os modelos': ['All styles', 'Todos los modelos'],
+  'Sem aro': ['No underwire', 'Sin aro'],
+  'Com aro': ['Underwire', 'Con aro'],
+  'Filtrar por cor': ['Filter by color', 'Filtrar por color'],
+  'Trocar cor': ['Change color', 'Cambiar color'],
+  'Limpar': ['Clear', 'Quitar'],
+  'Ver todas as cores': ['See all colors', 'Ver todos los colores'],
+  'Importante': ['Important', 'Importante'],
+  'Saídas de praia, saias, vestidos e calças não fazem parte do atacado.': ['Cover-ups, skirts, dresses and pants are not part of wholesale.', 'Salidas de playa, faldas, vestidos y pantalones no forman parte de la venta al por mayor.'],
+  'Não autorizamos o uso das fotos e vídeos da Oceamo.': ['Use of Oceamo photos and videos is not authorized.', 'No autorizamos el uso de las fotos y videos de Oceamo.'],
+  'Tops sem aro': ['Tops without underwire', 'Tops sin aro'],
+  'Tops com aro': ['Underwire tops', 'Tops con aro'],
+  'Tamanhos P, M, G e GG': ['Sizes P, M, G and GG', 'Tallas P, M, G y GG'],
+  'Tamanhos P, M e G': ['Sizes P, M and G', 'Tallas P, M y G'],
+  'Pix': ['Pix', 'Pix'],
+  'Cartão': ['Card', 'Tarjeta'],
+  'Sugestão de venda': ['Suggested retail', 'Precio sugerido de venta'],
+  'Comprar': ['Buy', 'Comprar'],
+  'Comprar mais': ['Buy more', 'Comprar más'],
+  'Best-seller': ['Best seller', 'Más vendido'],
+  'Pedras premium': ['Premium stones', 'Piedras premium'],
+  'Pedras delicadas': ['Delicate stones', 'Piedras delicadas'],
+
+  /* passos e dados */
+  'Seus dados': ['Your details', 'Tus datos'],
+  'Orçamento': ['Quote', 'Cotización'],
+  'Essas informações vão no orçamento e na mensagem do WhatsApp.': ['This information goes on the quote and in the WhatsApp message.', 'Esta información va en la cotización y en el mensaje de WhatsApp.'],
+  'Contato': ['Contact', 'Contacto'],
+  'Nome completo': ['Full name', 'Nombre completo'],
+  'Nome da loja ou @': ['Store name or @', 'Nombre de la tienda o @'],
+  'WhatsApp com DDD': ['WhatsApp with area code', 'WhatsApp con código de área'],
+  'WhatsApp com código do país': ['WhatsApp with country code', 'WhatsApp con código de país'],
+  'E-mail (opcional)': ['Email (optional)', 'Correo electrónico (opcional)'],
+  'CPF ou CNPJ': ['CPF or CNPJ (Brazilian tax ID)', 'CPF o CNPJ (documento brasileño)'],
+  'Documento (passaporte ou identidade)': ['ID (passport or national ID)', 'Documento (pasaporte o cédula)'],
+  'Entrega': ['Delivery', 'Entrega'],
+  'Moro fora do Brasil': ['I live outside Brazil', 'Vivo fuera de Brasil'],
+  'CEP': ['CEP (ZIP code)', 'CEP (código postal)'],
+  'Código postal (opcional)': ['ZIP / postal code (optional)', 'Código postal (opcional)'],
+  'Endereço': ['Address', 'Dirección'],
+  'Número': ['Number', 'Número'],
+  'Complemento (opcional)': ['Apt, suite, etc. (optional)', 'Complemento (opcional)'],
+  'Bairro': ['Neighborhood', 'Barrio'],
+  'Bairro (opcional)': ['Neighborhood (optional)', 'Barrio (opcional)'],
+  'Cidade': ['City', 'Ciudad'],
+  'UF': ['State (UF)', 'Estado (UF)'],
+  'Estado / província': ['State / province', 'Departamento / provincia'],
+  'País': ['Country', 'País'],
+  'Frete à parte': ['Shipping is separate', 'Envío aparte'],
+  'O frete é à parte. Assim que eu receber o seu orçamento, calculo o frete para o seu endereço e te envio as opções de PAC e Sedex para você escolher.': ['Shipping is charged separately. As soon as I receive your quote, I calculate shipping to your address and send you the PAC and Sedex options to choose from.', 'El envío es aparte. En cuanto reciba tu cotización, calculo el envío a tu dirección y te mando las opciones de PAC y Sedex para que elijas.'],
+  'Pagamento': ['Payment', 'Pago'],
+  'Forma de pagamento': ['Payment method', 'Forma de pago'],
+  'Pix à vista': ['Pix (Brazilian instant payment)', 'Pix (pago instantáneo de Brasil)'],
+  'Melhor preço. A produção começa após a compensação.': ['Best price. Production starts once payment clears.', 'Mejor precio. La producción empieza cuando se confirma el pago.'],
+  'Cartão de crédito': ['Credit card', 'Tarjeta de crédito'],
+  'Em até 3x sem juros, por link de pagamento.': ['Up to 3 interest-free installments, via payment link.', 'Hasta 3 cuotas sin intereses, por enlace de pago.'],
+  'Parcelas': ['Installments', 'Cuotas'],
+  'Observações (opcional)': ['Notes (optional)', 'Observaciones (opcional)'],
+  'Gerar orçamento': ['Create quote', 'Generar cotización'],
+  'Voltar aos modelos': ['Back to styles', 'Volver a los modelos'],
+  'Resumo do pedido': ['Order summary', 'Resumen del pedido'],
+  'Seu pedido': ['Your order', 'Tu pedido'],
+  'Editar': ['Edit', 'Editar'],
+  'Peças': ['Pieces', 'Piezas'],
+  'Total no Pix': ['Total with Pix', 'Total con Pix'],
+  'Informe seu nome completo.': ['Enter your full name.', 'Escribe tu nombre completo.'],
+  'Informe o nome da sua loja ou o @.': ['Enter your store name or @.', 'Escribe el nombre de tu tienda o el @.'],
+  'Informe o WhatsApp com DDD.': ['Enter your WhatsApp with area code.', 'Escribe tu WhatsApp con código de área.'],
+  'Informe o WhatsApp com o código do país.': ['Enter your WhatsApp with country code.', 'Escribe tu WhatsApp con el código de país.'],
+  'Informe o CPF (11 números) ou o CNPJ (14 números).': ['Enter the CPF (11 digits) or CNPJ (14 digits).', 'Escribe el CPF (11 números) o el CNPJ (14 números).'],
+  'Informe um documento (passaporte ou identidade).': ['Enter an ID (passport or national ID).', 'Escribe un documento (pasaporte o cédula).'],
+  'Informe o CEP com 8 números.': ['Enter the 8-digit CEP.', 'Escribe el CEP de 8 números.'],
+  'Informe o endereço.': ['Enter the address.', 'Escribe la dirección.'],
+  'Informe o número.': ['Enter the number.', 'Escribe el número.'],
+  'Informe o bairro.': ['Enter the neighborhood.', 'Escribe el barrio.'],
+  'Informe a cidade.': ['Enter the city.', 'Escribe la ciudad.'],
+  'Informe a UF com 2 letras.': ['Enter the 2-letter state (UF).', 'Escribe el estado (UF) con 2 letras.'],
+  'Informe o estado ou a província.': ['Enter the state or province.', 'Escribe el departamento o la provincia.'],
+  'Informe o país.': ['Enter the country.', 'Escribe el país.'],
+  'Confira o e-mail.': ['Check the email.', 'Revisa el correo electrónico.'],
+  'Não foi possível preencher o endereço por este CEP. Preencha os campos de endereço.': ['We couldn’t fill in the address from this CEP. Please fill in the address fields.', 'No fue posible completar la dirección con este CEP. Completa los campos de dirección.'],
+
+  /* orçamento */
+  'Orçamento pronto.': ['Quote ready.', 'Cotización lista.'],
+  'Confira abaixo e envie o PDF para a Oceamo pelo WhatsApp.': ['Check it below and send the PDF to Oceamo via WhatsApp.', 'Revísala abajo y envía el PDF a Oceamo por WhatsApp.'],
+  'Envie o seu pedido': ['Send your order', 'Envía tu pedido'],
+  'Encaminhe este orçamento em PDF para o nosso WhatsApp. Ele chega organizado, do jeito que aparece aqui.': ['Forward this quote as a PDF to our WhatsApp. It arrives organized, just as it looks here.', 'Reenvía esta cotización en PDF a nuestro WhatsApp. Llega organizada, tal como aparece aquí.'],
+  'Enviar PDF no WhatsApp': ['Send PDF on WhatsApp', 'Enviar PDF por WhatsApp'],
+  'Baixar o PDF': ['Download the PDF', 'Descargar el PDF'],
+  'Gerando o PDF…': ['Creating the PDF…', 'Generando el PDF…'],
+  'Na tela que abrir, toque em': ['On the screen that opens, tap', 'En la pantalla que se abre, toca'],
+  'e escolha a conversa com a': ['and choose the chat with', 'y elige la conversación con'],
+  'O arquivo fica salvo no seu aparelho.': ['The file is saved on your device.', 'El archivo queda guardado en tu dispositivo.'],
+  'Abrir conversa': ['Open chat', 'Abrir conversación'],
+  'Na conversa, toque no': ['In the chat, tap the', 'En la conversación, toca el'],
+  'clipe de anexo': ['attachment clip', 'clip de adjuntar'],
+  ', escolha': [', choose', ', elige'],
+  'Documento': ['Document', 'Documento'],
+  'e selecione o arquivo': ['and select the file', 'y selecciona el archivo'],
+  'O que acontece depois': ['What happens next', 'Qué pasa después'],
+  'Assim que recebermos o seu orçamento, verificamos com a confecção o prazo de produção do seu pedido e calculamos o frete dos Correios (PAC e Sedex) para o seu endereço.': ['As soon as we receive your quote, we check the production time for your order with our workshop and calculate Correios shipping (PAC and Sedex) to your address.', 'En cuanto recibamos tu cotización, verificamos con el taller el tiempo de producción de tu pedido y calculamos el envío por Correios (PAC y Sedex) a tu dirección.'],
+  'Como o prazo depende da quantidade de peças e da agenda da confecção,': ['Since the timeline depends on the number of pieces and the workshop schedule,', 'Como el plazo depende de la cantidad de piezas y de la agenda del taller,'],
+  'só conseguimos informar o prazo depois dessa verificação': ['we can only give you the timeline after this check', 'solo podemos informarte el plazo después de esta verificación'],
+  '. Em seguida, eu entro em contato pelo WhatsApp com o prazo e as opções de frete, para combinarmos tudo antes do pagamento.': ['. Then I’ll contact you on WhatsApp with the timeline and shipping options, so we can arrange everything before payment.', '. Después, te contacto por WhatsApp con el plazo y las opciones de envío, para acordar todo antes del pago.'],
+  'O frete é pago à parte,': ['Shipping is paid separately,', 'El envío se paga aparte,'],
+  'somente quando os seus conjuntos estiverem prontos': ['only when your sets are ready', 'solo cuando tus conjuntos estén listos'],
+  ', na opção que você escolher.': [', with the option you choose.', ', en la opción que elijas.'],
+  'Não conseguiu enviar o PDF?': ['Couldn’t send the PDF?', '¿No pudiste enviar el PDF?'],
+  'Enviar como mensagem de texto': ['Send as a text message', 'Enviar como mensaje de texto'],
+  'Copiar texto': ['Copy text', 'Copiar texto'],
+  'Editar dados': ['Edit details', 'Editar datos'],
+  'Começar novo pedido': ['Start a new order', 'Empezar un nuevo pedido'],
+  'Toque de novo para apagar este pedido': ['Tap again to delete this order', 'Toca de nuevo para borrar este pedido'],
+  'Selecione o texto abaixo e copie.': ['Select the text below and copy it.', 'Selecciona el texto de abajo y cópialo.'],
+  'Texto do orçamento': ['Quote text', 'Texto de la cotización'],
+  'Orçamento de atacado': ['Wholesale quote', 'Cotización mayorista'],
+  'Cliente': ['Customer', 'Cliente'],
+  'Endereço de entrega': ['Shipping address', 'Dirección de entrega'],
+  'Modelo': ['Style', 'Modelo'],
+  'Cor': ['Color', 'Color'],
+  'Calcinha': ['Bottom', 'Panty'],
+  'Tamanhos': ['Sizes', 'Tallas'],
+  'Unitário': ['Unit price', 'Unitario'],
+  'Total': ['Total', 'Total'],
+  'Total de peças': ['Total pieces', 'Total de piezas'],
+  'Frete': ['Shipping', 'Envío'],
+  'à parte, a calcular (PAC ou Sedex)': ['separate, to be calculated (PAC or Sedex)', 'aparte, por calcular (PAC o Sedex)'],
+  'Total dos produtos': ['Products total', 'Total de los productos'],
+  'Observações': ['Notes', 'Observaciones'],
+  'Condições': ['Terms', 'Condiciones'],
+  'O prazo de confecção depende da quantidade de conjuntos. O prazo final é informado no pagamento, junto com o cálculo do frete;': ['Production time depends on the number of sets. The final timeline is given at payment, along with the shipping quote;', 'El tiempo de confección depende de la cantidad de conjuntos. El plazo final se informa en el pago, junto con el cálculo del envío;'],
+  'O frete é à parte. Assim que eu receber o seu orçamento, calculo o frete para o seu endereço e te envio as opções de PAC e Sedex para você escolher;': ['Shipping is separate. As soon as I receive your quote, I calculate shipping to your address and send you the PAC and Sedex options to choose from;', 'El envío es aparte. En cuanto reciba tu cotización, calculo el envío a tu dirección y te mando las opciones de PAC y Sedex para que elijas;'],
+  'A produção começa após a compensação do pagamento;': ['Production starts once payment clears;', 'La producción empieza cuando se confirma el pago;'],
+  'Nossos tops têm design exclusivo e alças reguláveis nos ombros e nas costas, para um ajuste perfeito ao corpo. Acessórios banhados a ouro 24K com banho cataforético, mais resistentes ao cloro, à água do mar e ao desgaste;': ['Our tops have an exclusive design and adjustable straps at the shoulders and back, for a perfect fit. Hardware is 24K gold plated with cataphoretic coating, more resistant to chlorine, seawater and wear;', 'Nuestros tops tienen diseño exclusivo y tiras regulables en los hombros y en la espalda, para un ajuste perfecto al cuerpo. Accesorios bañados en oro de 24K con baño cataforético, más resistentes al cloro, al agua de mar y al desgaste;'],
+  'Peças sem etiqueta de marca, só etiqueta de tamanho;': ['No brand label, only a size label;', 'Piezas sin etiqueta de marca, solo etiqueta de talla;'],
+  'Texto do orçamento copiado': ['Quote text copied', 'Texto de la cotización copiado'],
+  'Pedido limpo. Seus dados continuam preenchidos.': ['Order cleared. Your details are still filled in.', 'Pedido borrado. Tus datos siguen guardados.'],
+  'Não foi possível gerar o PDF. Confira a internet e tente de novo.': ['We couldn’t create the PDF. Check your internet connection and try again.', 'No fue posible generar el PDF. Revisa tu conexión a internet e inténtalo de nuevo.'],
+  'Pronto! Confira se o PDF chegou na conversa com a Oceamo.': ['Done! Check that the PDF arrived in the chat with Oceamo.', '¡Listo! Revisa que el PDF haya llegado a la conversación con Oceamo.'],
+  'PDF salvo. Agora abra a conversa com a Oceamo e anexe o arquivo.': ['PDF saved. Now open the chat with Oceamo and attach the file.', 'PDF guardado. Ahora abre la conversación con Oceamo y adjunta el archivo.'],
+  'PDF baixado. Agora abra a conversa com a Oceamo e anexe o arquivo.': ['PDF downloaded. Now open the chat with Oceamo and attach the file.', 'PDF descargado. Ahora abre la conversación con Oceamo y adjunta el archivo.'],
+
+  /* rodapé e barra */
+  'Confecção própria localizada em Cabo Frio - RJ': ['Our own workshop in Cabo Frio, Rio de Janeiro, Brazil', 'Taller propio en Cabo Frío, Río de Janeiro, Brasil'],
+  'Falar com a Oceamo no WhatsApp': ['Message Oceamo on WhatsApp', 'Hablar con Oceamo por WhatsApp'],
+  'Ver a Oceamo no Instagram': ['See Oceamo on Instagram', 'Ver Oceamo en Instagram'],
+  'Ver pedido': ['View order', 'Ver pedido'],
+
+  /* painel do modelo */
+  'Fechar': ['Close', 'Cerrar'],
+  'Cores disponíveis': ['Available colors', 'Colores disponibles'],
+  'Cor única': ['Single color', 'Color único'],
+  'Toque em uma cor para ver as opções de calcinha e tamanhos.': ['Tap a color to see the bottom options and sizes.', 'Toca un color para ver las opciones de panty y tallas.'],
+  'Toque em uma cor para ver os tamanhos.': ['Tap a color to see the sizes.', 'Toca un color para ver las tallas.'],
+  'Modelo da calcinha': ['Bottom style', 'Modelo del panty'],
+  'Escolha uma': ['Choose one', 'Elige uno'],
+  'Todas as calcinhas têm a parte de trás no padrão meio fio.': ['All bottoms have a cheeky back (meio fio).', 'Todos los panties tienen la parte de atrás tipo semi-hilo (meio fio).'],
+  'Tamanhos e quantidades': ['Sizes and quantities', 'Tallas y cantidades'],
+  'Guia de medidas': ['Size guide', 'Guía de medidas'],
+  'Top e calcinha em tamanhos diferentes': ['Top and bottom in different sizes', 'Top y panty en tallas diferentes'],
+  'Observação (opcional)': ['Note (optional)', 'Observación (opcional)'],
+  'Incluir no pedido': ['Add to order', 'Agregar al pedido'],
+  'Salvar alterações': ['Save changes', 'Guardar cambios'],
+  'Alterações salvas': ['Changes saved', 'Cambios guardados'],
+  'Preço por peça': ['Price per piece', 'Precio por pieza'],
+  'Top com aro, do P ao G': ['Underwire top, P to G', 'Top con aro, de la P a la G'],
+  'Top sem aro': ['Top without underwire', 'Top sin aro'],
+  'Top sem aro, do P ao GG': ['Top without underwire, P to GG', 'Top sin aro, de la P a la GG'],
+  'Monte na cor que preferir': ['Made in the color you prefer', 'Hazlo en el color que prefieras'],
+  'Amostra aproximada da cor.': ['Approximate color sample.', 'Muestra aproximada del color.'],
+  'Ampliar foto': ['Zoom in on photo', 'Ampliar foto'],
+  'Foto ampliada': ['Enlarged photo', 'Foto ampliada'],
+  'Fechar foto ampliada': ['Close enlarged photo', 'Cerrar foto ampliada'],
+  'Foto anterior': ['Previous photo', 'Foto anterior'],
+  'Próxima foto': ['Next photo', 'Foto siguiente'],
+  'Arraste para ver os detalhes. Toque para voltar.': ['Drag to see the details. Tap to go back.', 'Arrastra para ver los detalles. Toca para volver.'],
+  'Toque na foto ou use dois dedos para aproximar': ['Tap the photo or use two fingers to zoom in', 'Toca la foto o usa dos dedos para acercar'],
+  'Clique na foto para aproximar': ['Click the photo to zoom in', 'Haz clic en la foto para acercar'],
+  'Escolha o tamanho do top, o da calcinha e a quantidade. Depois toque em': ['Choose the top size, the bottom size and the quantity. Then tap', 'Elige la talla del top, la del panty y la cantidad. Después toca'],
+  'Adicionar': ['Add', 'Agregar'],
+  'e repita para cada combinação.': ['and repeat for each combination.', 'y repite para cada combinación.'],
+  'Top': ['Top', 'Top'],
+  'Quantidade': ['Quantity', 'Cantidad'],
+  'Tamanho do top': ['Top size', 'Talla del top'],
+  'Tamanho da calcinha': ['Bottom size', 'Talla del panty'],
+  'Menos uma': ['One less', 'Una menos'],
+  'Mais uma': ['One more', 'Una más'],
+  'Quantidade desta combinação': ['Quantity of this combination', 'Cantidad de esta combinación'],
+  'Combinações escolhidas': ['Selected combinations', 'Combinaciones elegidas'],
+  '+ Calcinha': ['+ Bottom', '+ Panty'],
+  'Escolha o tamanho do top.': ['Choose the top size.', 'Elige la talla del top.'],
+  'Escolha o tamanho da calcinha.': ['Choose the bottom size.', 'Elige la talla del panty.'],
+  'As combinações de top e calcinha em tamanhos diferentes foram retiradas desta seleção.': ['The top and bottom combinations in different sizes were removed from this selection.', 'Las combinaciones de top y panty en tallas diferentes se quitaron de esta selección.'],
+  'Escolha uma cor.': ['Choose a color.', 'Elige un color.'],
+  'Escolha o modelo da calcinha.': ['Choose the bottom style.', 'Elige el modelo del panty.'],
+  'Informe quantas peças você quer de cada tamanho.': ['Enter how many pieces you want in each size.', 'Indica cuántas piezas quieres de cada talla.'],
+  'Formato da calcinha escolhida.': ['Shape of the selected bottom.', 'Forma del panty elegido.'],
+  'Tecnologia sem costura, com fio duplo.': ['Seamless technology, with double thread.', 'Tecnología sin costuras, con hilo doble.'],
+  'Melhor encaixe no bumbum, valorizando a silhueta.': ['Better fit on the bum, flattering the silhouette.', 'Mejor ajuste en la cola, realzando la silueta.'],
+  'Frente fixa em formato triangular.': ['Fixed triangle-shaped front.', 'Frente fija en forma triangular.'],
+  'Laterais de amarração, para ajustar como preferir.': ['Tie sides, to adjust however you like.', 'Laterales para amarrar, para ajustar como prefieras.'],
+  'Totalmente ajustável na frente e atrás: você regula a cobertura como preferir.': ['Fully adjustable front and back: you set the coverage however you like.', 'Totalmente ajustable adelante y atrás: regulas la cobertura como prefieras.'],
+  'Laterais de amarração.': ['Tie sides.', 'Laterales para amarrar.'],
+  'Laterais mais finas e ajustáveis: conforto e marquinha perfeita.': ['Thinner, adjustable sides: comfort and perfect tan lines.', 'Laterales más finos y ajustables: comodidad y marquita perfecta.'],
+  'Laterais mais largas e ajustáveis: conforto e marquinha perfeita.': ['Wider, adjustable sides: comfort and perfect tan lines.', 'Laterales más anchos y ajustables: comodidad y marquita perfecta.'],
+  'Acessórios banhados a ouro 24K com banho cataforético, mais resistentes ao cloro, à água do mar e ao desgaste.': ['24K gold-plated hardware with cataphoretic coating, more resistant to chlorine, seawater and wear.', 'Accesorios bañados en oro de 24K con baño cataforético, más resistentes al cloro, al agua de mar y al desgaste.'],
+
+  /* pedido (gaveta) */
+  'Total no Pix ': ['Total with Pix', 'Total con Pix'],
+  'No cartão': ['By card', 'Con tarjeta'],
+  'O frete é à parte: depois de receber o orçamento, a Oceamo calcula e envia as opções de PAC e Sedex.': ['Shipping is separate: after receiving the quote, Oceamo calculates it and sends the PAC and Sedex options.', 'El envío es aparte: al recibir la cotización, Oceamo lo calcula y envía las opciones de PAC y Sedex.'],
+  'Continuar': ['Continue', 'Continuar'],
+  'Continuar escolhendo': ['Keep shopping', 'Seguir eligiendo'],
+  'Remover': ['Remove', 'Quitar'],
+  'Seu pedido está vazio': ['Your order is empty', 'Tu pedido está vacío'],
+  'Escolha um modelo, toque em uma cor e inclua as peças.': ['Choose a style, tap a color and add the pieces.', 'Elige un modelo, toca un color y agrega las piezas.'],
+  'Complete com tops sem aro': ['Complete with tops without underwire', 'Completa con tops sin aro'],
+  'Escolha outra cor ou feche para ver outros modelos.': ['Choose another color or close to see other styles.', 'Elige otro color o cierra para ver otros modelos.'],
+};
+
+/* nomes de cores, calcinhas e vistas das fotos */
+const I18N_COR = {
+  'Poá branco': ['White polka dot', 'Lunares blancos'], 'Poá preto': ['Black polka dot', 'Lunares negros'], 'Poá marrom': ['Brown polka dot', 'Lunares café'],
+  'Verde esmeralda': ['Emerald green', 'Verde esmeralda'], 'Marrom': ['Brown', 'Café'], 'Vinho': ['Wine', 'Vino'], 'Vermelho liso': ['Solid red', 'Rojo liso'], 'Vermelho': ['Red', 'Rojo'],
+  'Preto crepinho': ['Black crepe', 'Negro crepé'], 'Preto liso': ['Solid black', 'Negro liso'], 'Preto': ['Black', 'Negro'], 'Hot pink com terracota': ['Hot pink & terracotta', 'Fucsia con terracota'],
+  'Off white noronha': ['Off-white Noronha', 'Blanco hueso Noronha'], 'Off white com marrom': ['Off-white & brown', 'Blanco hueso con café'], 'Off white crepinho': ['Off-white crepe', 'Blanco hueso crepé'], 'Off white': ['Off-white', 'Blanco hueso'],
+  'Cappuccino': ['Cappuccino', 'Capuchino'], 'Expresso': ['Espresso', 'Expreso'], 'Onça solar': ['Solar leopard print', 'Leopardo solar'], 'Areia solar': ['Solar sand', 'Arena solar'],
+  'Tangerina': ['Tangerine', 'Mandarina'], 'Terracota vellour': ['Terracotta velour', 'Terracota velour'], 'Rosa dolce': ['Rosa dolce', 'Rosa dolce'], 'Azul dolce': ['Azul dolce', 'Azul dolce'],
+  'Amarelo manteiga xadrez': ['Butter yellow gingham', 'Amarillo mantequilla a cuadros'], 'Amarelo manteiga': ['Butter yellow', 'Amarillo mantequilla'],
+  'Marrom crepinho': ['Brown crepe', 'Café crepé'], 'Matcha': ['Matcha', 'Matcha'], 'Verde jade': ['Jade green', 'Verde jade'], 'Preto e branco': ['Black & white', 'Negro y blanco'], 'Butter sun': ['Butter sun', 'Butter sun'],
+};
+const I18N_CALC = { 'Asa delta': ['Asa delta', 'Asa delta'], 'Aura': ['Aura', 'Aura'], 'Sirena': ['Sirena', 'Sirena'], 'Khali': ['Khali', 'Khali'], 'Amarrar tradicional': ['Classic tie-side', 'Tradicional de amarrar'], 'Própria do conjunto': ['Set’s own bottom', 'Propio del conjunto'] };
+const I18N_VISTA = { frente: ['front', 'frente'], costas: ['back', 'espalda'], lado: ['side', 'lado'], detalhe: ['detail', 'detalle'] };
+
+let LANG = 'pt';
+const LI = () => LANG === 'en' ? 0 : 1;
+const ehMaiusc = s => s[0] && s[0] !== s[0].toLowerCase();
+const comoCaixa = (orig, tr) => ehMaiusc(orig) ? tr[0].toUpperCase() + tr.slice(1) : tr[0].toLowerCase() + tr.slice(1);
+function trDe(tab, s){
+  if (s == null) return null;
+  const k = Object.keys(tab).find(x => x.toLowerCase() === String(s).trim().toLowerCase());
+  return k ? comoCaixa(String(s).trim(), tab[k][LI()]) : null;
+}
+const C = s => trDe(I18N_COR, s) ?? s;
+const K = s => trDe(I18N_CALC, s) ?? s;
+const V = s => (I18N_VISTA[s] || [s, s])[LI()];
+const EN = () => LANG === 'en';
+const pz = (n, q) => { n = +n; return EN() ? `${n} ${n === 1 ? 'piece' : 'pieces'}` : `${n} ${n === 1 ? 'pieza' : 'piezas'}`; };
+const cj = n => { n = +n; return EN() ? `${n} ${n === 1 ? 'set' : 'sets'}` : `${n} ${n === 1 ? 'conjunto' : 'conjuntos'}`; };
+const DIN = 'R\\$\\s?[\\d.,]+';
+const rx = s => new RegExp('^' + s + '$');
+const nomeMod = () => (typeof MODELOS !== 'undefined' ? MODELOS : []).map(m => m.nome).sort((a, b) => b.length - a.length);
+/* frases com números, nomes e cores */
+const I18N_RX = [
+  [rx('(\\d+) peças?'), (n) => pz(n)],
+  [rx('(\\d+) peças? no pedido'), (n) => EN() ? `${pz(n)} in your order` : `${pz(n)} en tu pedido`],
+  [rx('(\\d+) de (\\d+)'), (a, b) => EN() ? `${a} of ${b}` : `${a} de ${b}`],
+  [rx('(\\d+) de (\\d+) peças'), (a, b) => EN() ? `${a} of ${b} pieces` : `${a} de ${b} piezas`],
+  [rx('Abrir pedido, (.+)'), (x) => (EN() ? 'Open order, ' : 'Abrir pedido, ') + T(x)],
+  [rx('(.+) e mais (\\d+)'), (c, n) => trDe(I18N_COR, c) ? (EN() ? `${C(c)} and ${n} more` : `${C(c)} y ${n} más`) : null],
+  [rx('(\\d+) (cor|cores)(\\*?)'), (n, _, a) => (EN() ? `${n} ${+n === 1 ? 'color' : 'colors'}` : `${n} ${+n === 1 ? 'color' : 'colores'}`) + a],
+  [rx('(\\d+) (cor|cores) · monte na sua cor'), (n) => EN() ? `${n} colors · or your color` : `${n} colores · o en tu color`],
+  [rx('(.+), (\\d+ cores?), (' + DIN + ') no Pix\\. Ver cores e montar o pedido'), (m, nc, v) => EN() ? `${m}, ${T(nc)}, ${v} with Pix. See colors and build your order` : `${m}, ${T(nc)}, ${v} con Pix. Ver colores y armar el pedido`],
+  [rx('Nenhum modelo( com aro| sem aro)? na cor (.+)\\.'), (g, c) => EN() ? `No styles${g ? (g.includes('com') ? ' with underwire' : ' without underwire') : ''} in ${C(c)}.` : `Ningún modelo${g ? (g.includes('com') ? ' con aro' : ' sin aro') : ''} en el color ${C(c)}.`],
+  [rx('(\\d+) (modelo|modelos)'), (n) => EN() ? `${n} ${+n === 1 ? 'style' : 'styles'}` : `${n} ${+n === 1 ? 'modelo' : 'modelos'}`],
+  [rx('(\\d+) cores disponíveis'), (n) => EN() ? `${n} colors available` : `${n} colores disponibles`],
+  [rx('(.+?), com foto(, (\\d+) peças? no pedido)?'), (c, _, q) => trDe(I18N_COR, c) ? C(c) + (EN() ? ', with photo' : ', con foto') + (q ? ', ' + T(`${q} peças no pedido`) : '') : null],
+  [rx('(.+?), (\\d+) peças? no pedido'), (c, q) => trDe(I18N_COR, c) ? C(c) + ', ' + T(`${q} peças no pedido`) : null],
+  [rx('\\* As pedras deste conjunto são feitas especialmente para cada cor\\. Por isso, o (.+) é confeccionado somente nas cores acima\\.'), (m) => EN() ? `* The stones on this set are made specifically for each color. That’s why the ${m} is made only in the colors above.` : `* Las piedras de este conjunto se hacen especialmente para cada color. Por eso, el ${m} se confecciona solo en los colores de arriba.`],
+  [rx('Ainda não temos foto do (.+) nestas cores, mas confeccionamos sob encomenda\\. A amostra mostra a cor aproximada\\.'), (m) => EN() ? `We don’t have photos of the ${m} in these colors yet, but we make it to order. The swatch shows the approximate color.` : `Todavía no tenemos fotos del ${m} en estos colores, pero lo confeccionamos por encargo. La muestra indica el color aproximado.`],
+  [rx('Sem foto do (.+) nesta cor\\. Confeccionamos sob encomenda\\.'), (m) => EN() ? `No photo of the ${m} in this color. We make it to order.` : `Sin foto del ${m} en este color. Lo confeccionamos por encargo.`],
+  [rx('(.+?)(, (frente|costas|lado|detalhe))?\\.( Na foto, calcinha (.+)\\.)?'), (c, _, v, __, k) => trDe(I18N_COR, c) ? C(c) + (v ? ', ' + V(v) : '') + '.' + (k ? (EN() ? ` In the photo, ${K(k)} bottom.` : ` En la foto, panty ${K(k)}.`) : '') : null],
+  [rx('Biquíni (.+) na cor (.+)'), (m, c) => EN() ? `${m} bikini in ${C(c)}` : `Bikini ${m} en ${C(c)}`],
+  [rx('Biquíni (.+)'), (m) => EN() ? `${m} bikini` : `Bikini ${m}`],
+  [rx('(\\d+) peças? do (.+) no pedido(?: · (?:(\\d+) nesta cor|(nenhuma) nesta cor))?'), (n, m, q, z) => (EN() ? `${pz(n)} of ${m} in your order` : `${pz(n)} de ${m} en tu pedido`) + (q ? (EN() ? ` · ${q} in this color` : ` · ${q} en este color`) : z ? (EN() ? ' · none in this color' : ' · ninguna en este color') : '')],
+  [rx('Ver (.+?)(, (frente|costas|lado|detalhe))?( com calcinha (.+))?'), (c, _, v, __, k) => trDe(I18N_COR, c) ? (EN() ? 'See ' : 'Ver ') + C(c) + (v ? ', ' + V(v) : '') + (k ? (EN() ? ` with ${K(k)} bottom` : ` con panty ${K(k)}`) : '') : null],
+  [rx('Menos uma peça (P|M|G|GG)'), (t) => EN() ? `One less ${t}` : `Una menos ${t}`],
+  [rx('Mais uma peça (P|M|G|GG)'), (t) => EN() ? `One more ${t}` : `Una más ${t}`],
+  [rx('Quantidade (P|M|G|GG)'), (t) => EN() ? `Quantity ${t}` : `Cantidad ${t}`],
+  [rx('Adicionar top (\\w+) \\+ calcinha (\\w+)'), (t, c) => EN() ? `Add top ${t} + bottom ${c}` : `Agregar top ${t} + panty ${c}`],
+  [rx('(Menos uma|Mais uma|Remover|Quantidade),? top (\\w+) com calcinha (\\w+)'), (a, t, c) => ({ 'Menos uma': EN() ? 'One less' : 'Una menos', 'Mais uma': EN() ? 'One more' : 'Una más', 'Remover': EN() ? 'Remove' : 'Quitar', 'Quantidade': EN() ? 'Quantity' : 'Cantidad' }[a]) + (EN() ? `, top ${t} with bottom ${c}` : `, top ${t} con panty ${c}`)],
+  [rx('(Menos uma|Mais uma) peça, tamanho (\\w+)'), (a, t) => (a === 'Menos uma' ? (EN() ? 'One less' : 'Una menos') : (EN() ? 'One more' : 'Una más')) + (EN() ? `, size ${t}` : `, talla ${t}`)],
+  [rx('(Menos uma|Mais uma) peça, top (\\w+) com calcinha (\\w+)'), (a, t, c) => (a === 'Menos uma' ? (EN() ? 'One less' : 'Una menos') : (EN() ? 'One more' : 'Una más')) + (EN() ? `, top ${t} with bottom ${c}` : `, top ${t} con panty ${c}`)],
+  [rx('(\\d+) peças? nesta seleção'), (n) => EN() ? `${pz(n)} in this selection` : `${pz(n)} en esta selección`],
+  [rx('(\\d+) peças? no Pix'), (n) => EN() ? `${pz(n)} with Pix` : `${pz(n)} con Pix`],
+  [rx('(' + DIN + ') no Pix'), (v) => EN() ? `${v} with Pix` : `${v} con Pix`],
+  [rx('(' + DIN + ') a (\\d+)'), (v, b) => EN() ? `${v} to ${b}` : `${v} a ${b}`],
+  [rx('Incluído: (\\d+) peças? na cor (.+?)\\. Seu pedido tem (?:(\\d+) peças?|(\\d+) de (\\d+) peças)\\. Escolha outra cor ou feche para ver outros modelos\\.'), (n, c, tot, a, b) =>
+    EN() ? `Added: ${pz(n)} in ${C(c)}. Your order has ${tot ? pz(tot) : `${a} of ${b} pieces`}. Choose another color or close to see other styles.` : `Agregado: ${pz(n)} en ${C(c)}. Tu pedido tiene ${tot ? pz(tot) : `${a} de ${b} piezas`}. Elige otro color o cierra para ver otros modelos.`],
+  [rx('Calcinha (.+)'), (k) => trDe(I18N_CALC, k) ? (EN() ? `${K(k)[0].toUpperCase() + K(k).slice(1)} bottom` : `Panty ${K(k)}`) : null],
+  [rx('(.+), calcinha (.+)'), (c, k) => trDe(I18N_COR, c) && trDe(I18N_CALC, k) ? (EN() ? `${C(c)}, ${K(k)} bottom` : `${C(c)}, panty ${K(k)}`) : null],
+  [rx('Obs\\.: ([\\s\\S]*)'), (o) => (EN() ? 'Note: ' : 'Obs.: ') + o],
+  [rx('Top (\\w+) \\+ Calc\\. (\\w+)'), (t, c) => EN() ? `Top ${t} + Bottom ${c}` : `Top ${t} + Panty ${c}`],
+  [rx('(.+), (' + DIN + ') no Pix\\. Ver cores'), (m, v) => EN() ? `${m}, ${v} with Pix. See colors` : `${m}, ${v} con Pix. Ver colores`],
+  [rx('Pedido mínimo atingido: (\\d+) conjuntos\\.'), (n) => EN() ? `Minimum order reached: ${cj(n)}.` : `Pedido mínimo alcanzado: ${cj(n)}.`],
+  [rx('Faltam (\\d+) conjuntos? para completar o pedido mínimo de (\\d+) \\(você tem (\\d+)\\)\\.'), (f, m, n) => EN() ? `${cj(f)} to go to reach the ${m}-piece minimum (you have ${n}).` : `Faltan ${cj(f)} para completar el pedido mínimo de ${m} (tienes ${n}).`],
+  [rx('(' + DIN + '), até 3x de (' + DIN + ')'), (a, b) => EN() ? `${a}, or 3 × ${b}` : `${a}, o 3 cuotas de ${b}`],
+  [rx('Inclua mais (\\d+) conjuntos? para fechar o pedido'), (n) => EN() ? `Add ${cj(n)} more to complete the order` : `Agrega ${cj(n)} más para cerrar el pedido`],
+  [rx('(.+) saiu do pedido'), (x) => { const m = nomeMod().find(n => x.startsWith(n + ' ')); if (!m) return null; return EN() ? `${m} ${C(x.slice(m.length + 1))} was removed from the order` : `${m} ${C(x.slice(m.length + 1))} salió del pedido`; }],
+  [rx('((?:(?:P|M|G|GG): \\d+|top \\w+ com calcinha \\w+: \\d+)(?:, )?)+'), (x) => x.replace(/top (\w+) com calcinha (\w+)/g, (_, t, c) => EN() ? `top ${t} with bottom ${c}` : `top ${t} con panty ${c}`)],
+  [rx('Total no cartão, (\\d+)x de (' + DIN + ')'), (n, v) => EN() ? `Card total, ${n} × ${v}` : `Total con tarjeta, ${n} cuotas de ${v}`],
+  [rx('(\\d+)x de (' + DIN + ') sem juros'), (n, v) => EN() ? `${n} × ${v}, interest-free` : `${n} ${+n === 1 ? 'cuota' : 'cuotas'} de ${v} sin intereses`],
+  [rx('Seu pedido tem (\\d+) de (\\d+) peças\\. Inclua mais (\\d+) para gerar o orçamento\\.'), (a, b, c) => EN() ? `Your order has ${a} of ${b} pieces. Add ${c} more to create the quote.` : `Tu pedido tiene ${a} de ${b} piezas. Agrega ${c} más para generar la cotización.`],
+  [rx('CPF/CNPJ (.+)'), (d) => (EN() ? 'Tax ID (CPF/CNPJ) ' : 'CPF/CNPJ ') + d],
+  [rx('Documento (.+)'), (d) => (EN() ? 'ID ' : 'Documento ') + d],
+  [rx('CEP (.+)'), (d) => (EN() ? 'ZIP (CEP) ' : 'Código postal (CEP) ') + d],
+  [rx('Código postal (.+)'), (d) => (EN() ? 'ZIP / postal code ' : 'Código postal ') + d],
+  [rx('Cartão de crédito, (\\d+)x de (' + DIN + ') sem juros \\(link de pagamento\\)'), (n, v) => EN() ? `Credit card, ${n} × ${v} interest-free (payment link)` : `Tarjeta de crédito, ${n} ${+n === 1 ? 'cuota' : 'cuotas'} de ${v} sin intereses (enlace de pago)`],
+];
+const MISSING = new Set();
+function T(s){
+  if (LANG === 'pt' || s == null) return s;
+  const k = String(s).trim(); if (!k) return s;
+  if (/^[\d\s.,:%+×x\-−–·*/()]*$/.test(k) || /^R\$\s?[\d.,]+$/.test(k) || /^(P|M|G|GG)$/.test(k)) return s;
+  let r = I18N[k] ? I18N[k][LI()] : null;
+  if (r == null) r = trDe(I18N_COR, k) ?? trDe(I18N_CALC, k);
+  if (r == null) for (const [re, fn] of I18N_RX){ const m = k.match(re); if (m){ const v = fn(...m.slice(1)); if (v != null){ r = v; break; } } }
+  if (r == null){ MISSING.add(k); return s; }
+  return String(s).replace(k, r);
+}
+
+/* ---------- aplica a tradução na página ---------- */
+const I18N_ORIG = new WeakMap(), I18N_SET = new WeakMap(), I18N_ATTRS = ['aria-label', 'alt', 'placeholder', 'title', 'data-l'];
+const pular = el => !!(el && el.closest && el.closest('script,style,textarea,[data-noi18n]'));
+function trTexto(n){
+  if (pular(n.parentElement)) return;
+  if (!I18N_ORIG.has(n) || n.nodeValue !== I18N_SET.get(n)) I18N_ORIG.set(n, n.nodeValue);
+  const v = LANG === 'pt' ? I18N_ORIG.get(n) : T(I18N_ORIG.get(n));
+  I18N_SET.set(n, v); if (n.nodeValue !== v) n.nodeValue = v;
+}
+function trAttrs(el){
+  if (pular(el)) return;
+  let o = I18N_ORIG.get(el); if (!o){ o = {}; I18N_ORIG.set(el, o); }
+  let s = I18N_SET.get(el); if (!s){ s = {}; I18N_SET.set(el, s); }
+  I18N_ATTRS.forEach(a => {
+    if (!el.hasAttribute(a)) return;
+    const atual = el.getAttribute(a);
+    if (!(a in o) || atual !== s[a]) o[a] = atual;
+    const v = LANG === 'pt' ? o[a] : T(o[a]); s[a] = v; if (atual !== v) el.setAttribute(a, v);
+  });
+}
+function trArvore(raiz){
+  if (raiz.nodeType === 3) return trTexto(raiz);
+  if (raiz.nodeType !== 1) return;
+  [raiz, ...raiz.querySelectorAll('[data-so-lang]')].forEach(el => { if (el.dataset && el.dataset.soLang) el.hidden = !el.dataset.soLang.split(' ').includes(LANG); });
+  if (pular(raiz)) return;
+  trAttrs(raiz);
+  const w = document.createTreeWalker(raiz, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT, { acceptNode: n => n.nodeType === 1 && pular(n) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
+  let n; while ((n = w.nextNode())){ if (n.nodeType === 3){ if (n.nodeValue.trim()) trTexto(n); } else trAttrs(n); }
+}
+let I18N_OCUPADO = false;
+const obs = new MutationObserver(lista => {
+  if (I18N_OCUPADO) return; I18N_OCUPADO = true;
+  try {
+    lista.forEach(m => {
+      if (m.type === 'childList') m.addedNodes.forEach(trArvore);
+      else if (m.type === 'characterData'){ if (m.target.nodeValue !== I18N_SET.get(m.target)) trTexto(m.target); }
+      else if (m.type === 'attributes'){ const s = I18N_SET.get(m.target); if (!s || m.target.getAttribute(m.attributeName) !== s[m.attributeName]) trAttrs(m.target); }
+    });
+  } finally { I18N_OCUPADO = false; }
+});
+const TITULOS = { pt:'Oceamo Atacado', en:'Oceamo Wholesale', es:'Oceamo Mayorista' };
+function aplicarIdioma(l){
+  LANG = ['pt', 'en', 'es'].includes(l) ? l : 'pt';
+  document.documentElement.lang = LANG === 'pt' ? 'pt-BR' : LANG === 'en' ? 'en-US' : 'es';
+  document.title = TITULOS[LANG];
+  $$('[data-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === LANG)));
+  $$('[data-so-lang]').forEach(el => el.hidden = !el.dataset.soLang.split(' ').includes(LANG));
+  I18N_OCUPADO = true; try { trArvore(document.body); } finally { I18N_OCUPADO = false; }
+  try { localStorage.setItem('oceamo-idioma', LANG); } catch (e) {}
+}
+obs.observe(document.body, { subtree:true, childList:true, characterData:true, attributes:true, attributeFilter:I18N_ATTRS });
+document.addEventListener('click', e => { const b = e.target.closest('[data-lang]'); if (b) aplicarIdioma(b.dataset.lang); });
+/* Abre sempre em português; só muda se a cliente escolher (e lembra a escolha dela) */
+(() => { let l = 'pt'; try { l = localStorage.getItem('oceamo-idioma') || 'pt'; } catch (e) {} if (l !== 'pt') aplicarIdioma(l); })();
 </script>
 
 </body>
