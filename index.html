@@ -96,9 +96,10 @@ h1,h2,h3{text-wrap:balance}
 .id-menu button[aria-checked="true"]{color:var(--cacau);font-weight:500}
 .id-menu button[aria-checked="true"] .id-ok{visibility:visible}
 .marca{background:none;border:0;padding:0 0 0 .34em;font-family:var(--display);font-weight:500;font-size:1.5rem;letter-spacing:.34em;color:var(--cacau)}
-.marca-topo{display:flex;flex-direction:column;align-items:center;gap:3px;line-height:1}
-.marca-topo .m-nome{display:block}
-.m-sub{display:block;font-family:var(--sans);font-size:.5rem;font-weight:400;letter-spacing:1.65em;text-transform:uppercase;color:var(--suave);padding-left:1.65em}
+.marca-topo{display:flex;flex-direction:column;align-items:stretch;gap:5px;width:9.6rem;padding:0;letter-spacing:0;line-height:1}
+.marca-topo .m-nome,.marca-topo .m-sub{display:flex;justify-content:space-between}
+.marca-topo .m-nome{font-size:1.55rem}
+.m-sub{font-family:var(--sans);font-size:.52rem;font-weight:400;color:var(--suave)}
 .sacola{justify-self:end;height:36px;display:inline-flex;align-items:center;gap:9px;border:1px solid var(--fio);background:var(--areia);border-radius:999px;padding:0 15px;font-size:.84rem;color:var(--cacau)}
 .sacola:hover{border-color:var(--caramelo-esc)}
 .sacola svg{width:17px;height:17px;flex:none}
@@ -611,8 +612,10 @@ h1,h2,h3{text-wrap:balance}
   .faixa{font-size:.74rem}
   .topo-in{grid-template-columns:1fr auto 1fr;gap:8px}
   .id-atual{height:34px;padding:0 8px 0 9px;gap:6px;font-size:.72rem}
-  .topo .marca{justify-self:center;padding-left:.28em;font-size:1.05rem;letter-spacing:.28em}
-  .m-sub{font-size:.42rem;letter-spacing:1.12em;padding-left:1.12em}
+  .topo .marca{justify-self:center}
+  .marca-topo{width:7.4rem;gap:4px}
+  .marca-topo .m-nome{font-size:1.18rem}
+  .m-sub{font-size:.45rem}
   .sacola{height:34px;padding:0 12px;gap:7px;font-size:.78rem;white-space:nowrap}
   .sacola svg{width:16px;height:16px}
   .sacola .s-txt{display:none}
@@ -633,7 +636,7 @@ h1,h2,h3{text-wrap:balance}
     <div class="topo-l">
       <div class="idioma" data-noi18n><button type="button" class="id-atual" id="idAtual" aria-haspopup="true" aria-expanded="false" aria-controls="idMenu" aria-label="Idioma: Português"><span class="id-flag"><svg class="bandeira" viewBox="0 0 28 20" aria-hidden="true"><rect width="28" height="20" fill="#009C3B"/><path d="M14 2.2 25.6 10 14 17.8 2.4 10z" fill="#FFDF00"/><circle cx="14" cy="10" r="4.6" fill="#002776"/><path d="M9.6 9.1c3-.9 6.1-.6 8.8.9" stroke="#fff" stroke-width=".9" fill="none"/></svg></span><span class="id-sig">PT</span><svg class="id-seta" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="id-menu" id="idMenu" role="menu" hidden><button type="button" role="menuitemradio" data-lang="pt" aria-checked="true"><svg class="bandeira" viewBox="0 0 28 20" aria-hidden="true"><rect width="28" height="20" fill="#009C3B"/><path d="M14 2.2 25.6 10 14 17.8 2.4 10z" fill="#FFDF00"/><circle cx="14" cy="10" r="4.6" fill="#002776"/><path d="M9.6 9.1c3-.9 6.1-.6 8.8.9" stroke="#fff" stroke-width=".9" fill="none"/></svg><span>Português</span><svg class="id-ok" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5 6.5 11.5 12.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" role="menuitemradio" data-lang="en" aria-checked="false"><svg class="bandeira" viewBox="0 0 28 20" aria-hidden="true"><rect width="28" height="20" fill="#fff"/><g fill="#B22234"><rect width="28" height="1.54"/><rect y="3.08" width="28" height="1.54"/><rect y="6.15" width="28" height="1.54"/><rect y="9.23" width="28" height="1.54"/><rect y="12.31" width="28" height="1.54"/><rect y="15.38" width="28" height="1.54"/><rect y="18.46" width="28" height="1.54"/></g><rect width="12.6" height="10.77" fill="#3C3B6E"/><g fill="#fff"><circle cx="2.1" cy="1.9" r=".55"/><circle cx="5.3" cy="1.9" r=".55"/><circle cx="8.5" cy="1.9" r=".55"/><circle cx="11.2" cy="1.9" r=".55"/><circle cx="3.7" cy="4" r=".55"/><circle cx="6.9" cy="4" r=".55"/><circle cx="10" cy="4" r=".55"/><circle cx="2.1" cy="6.1" r=".55"/><circle cx="5.3" cy="6.1" r=".55"/><circle cx="8.5" cy="6.1" r=".55"/><circle cx="11.2" cy="6.1" r=".55"/><circle cx="3.7" cy="8.3" r=".55"/><circle cx="6.9" cy="8.3" r=".55"/><circle cx="10" cy="8.3" r=".55"/></g></svg><span>English</span><svg class="id-ok" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5 6.5 11.5 12.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" role="menuitemradio" data-lang="es" aria-checked="false"><svg class="bandeira" viewBox="0 0 28 20" aria-hidden="true"><rect width="28" height="20" fill="#AA151B"/><rect y="5" width="28" height="10" fill="#F1BF00"/></svg><span>Español</span><svg class="id-ok" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5 6.5 11.5 12.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div>
     </div>
-    <button class="marca marca-topo" type="button" data-ir="loja" aria-label="Oceamo, voltar aos modelos"><span class="m-nome">OCEAMO</span><span class="m-sub" aria-hidden="true">Swimwear</span></button>
+    <button class="marca marca-topo" type="button" data-ir="loja" aria-label="Oceamo, voltar aos modelos"><span class="m-nome" aria-hidden="true"><span>O</span><span>C</span><span>E</span><span>A</span><span>M</span><span>O</span></span><span class="m-sub" aria-hidden="true"><span>S</span><span>W</span><span>I</span><span>M</span><span>W</span><span>E</span><span>A</span><span>R</span></span></button>
     <button class="sacola" type="button" id="btnPedido" aria-label="Abrir pedido">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
       <span class="s-txt">Pedido</span><b class="num" id="pedidoCont">0 de 12</b>
