@@ -75,8 +75,10 @@ h1,h2,h3{text-wrap:balance}
 .lnk:hover{color:var(--caramelo-hover)}
 
 /* faixa e topo */
-.faixa{background:var(--caramelo);color:var(--cacau);font-size:.8rem;text-align:center;letter-spacing:.02em}
-.faixa .wrap{padding-block:8px}
+.faixa{background:var(--caramelo);color:var(--cacau);font-size:.68rem;font-weight:500;text-align:center;text-transform:uppercase;letter-spacing:.16em}
+.faixa .wrap{padding-block:9px;display:flex;justify-content:center;align-items:center;gap:14px;white-space:nowrap;overflow:hidden}
+.faixa .f-sep{width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.55;flex:none}
+.faixa .f-mob{display:none}
 .topo{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:var(--creme);border-bottom:1px solid var(--fio)}
 .topo-in{height:var(--hh);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px}
 .topo-esq{font-size:.82rem;color:var(--suave)}
@@ -611,7 +613,10 @@ h1,h2,h3{text-wrap:balance}
   .capa{grid-template-columns:1fr;min-height:0}
   .capa-foto{display:none}
   .capa-txt{margin-left:0;padding-block:44px 48px}
-  .faixa{font-size:.74rem}
+  .faixa{font-size:.6rem;letter-spacing:.12em}
+  .faixa .wrap{gap:10px;padding-block:8px}
+  .faixa .f-desk,.faixa .moeda-faixa{display:none!important}
+  .faixa .f-mob{display:inline}
   .topo-in{grid-template-columns:1fr auto 1fr;gap:8px}
   .id-atual{height:34px;padding:0 8px 0 9px;gap:6px;font-size:.72rem}
   .topo .marca{justify-self:center}
@@ -632,7 +637,7 @@ h1,h2,h3{text-wrap:balance}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 
-<div class="faixa"><div class="wrap">Pedido mínimo de 12 peças, combinando modelos, cores e tamanhos<span class="moeda-faixa" data-so-lang="en es" hidden> · Valores em reais (R$), moeda do Brasil.</span></div></div>
+<div class="faixa"><div class="wrap"><span class="f-min">Pedido mínimo de 12 peças</span><span class="f-sep" aria-hidden="true"></span><span class="f-desk">Mix livre de modelos, cores e tamanhos</span><span class="f-mob">Mix livre</span><span class="moeda-faixa" data-so-lang="en es" hidden> · Valores em reais (R$), moeda do Brasil.</span></div></div>
 <header class="topo">
   <div class="wrap topo-in">
     <div class="topo-l">
@@ -1916,6 +1921,8 @@ renderCatalogo(); atualizar(); ir('loja');
 const I18N = {
   /* topo, capa e regras */
   'Pedido mínimo de 12 peças, combinando modelos, cores e tamanhos': ['12-piece minimum order, mixing styles, colors and sizes', 'Pedido mínimo de 12 piezas, combinando modelos, colores y tallas'],
+  'Mix livre de modelos, cores e tamanhos': ['Mix and match styles, colors and sizes', 'Mix libre de modelos, colores y tallas'],
+  'Mix livre': ['Mix and match', 'Mix libre'],
   'Valores em reais (R$), moeda do Brasil.': ['Prices in Brazilian reais (R$ · BRL).', 'Precios en reales brasileños (R$ · BRL).'],
   '· Valores em reais (R$), moeda do Brasil.': ['· Prices in Brazilian reais (R$ · BRL).', '· Precios en reales brasileños (R$ · BRL).'],
   'Guia de medidas Oceamo: tabela de top (busto) e de calcinha (cintura e quadril) nos tamanhos P, M, G e GG, e como medir': ['Oceamo size guide: top (bust) and bottom (waist and hips) table in sizes P, M, G and GG, and how to measure', 'Guía de medidas Oceamo: tabla de top (busto) y de panty (cintura y cadera) en las tallas P, M, G y GG, y cómo medir'],
