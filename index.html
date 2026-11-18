@@ -1167,7 +1167,7 @@ function cardHTML(m, larga){
   const dots = ordem.slice(0, 7).map((c, i) => `<span class="dot${ui.cor && i === 0 ? ' marcado' : ''}" style="${amostra(c.nome, .7)}"></span>`).join('');
   const n = m.cores.length, nc = `${n} ${n > 1 ? 'cores' : 'cor'}`;
   return `<button class="card${larga ? ' larga' : ''}" type="button" data-mid="${m.id}" aria-label="${esc(m.nome)}, ${nc}, ${reais(m.pix)} no Pix. Ver cores e montar o pedido">
-    <span class="card-foto"><img src="${src}" alt="" loading="lazy">${alt ? `<img class="alt" src="${alt}" alt="" loading="lazy">` : ''}${tag}${ped}</span>
+    <span class="card-foto"><img src="${src}" alt="" decoding="async">${alt ? `<img class="alt" src="${alt}" alt="" loading="lazy">` : ''}${tag}${ped}</span>
     <span class="card-txt">
       <span class="card-nome">${esc(m.nome)}</span>
       ${m.nota ? `<span class="card-nota">${esc(m.nota)}</span>` : ''}
@@ -1782,6 +1782,18 @@ function gerarOrcamento(){
   prepararEnvio();
 }
 $('#btnPDF').addEventListener('click', entregarPDF);
+/* fotos: se uma imagem falhar (rede do celular instável), tenta de novo sozinha;
+   e, depois que a página carrega, busca as fotos "preguiçosas" para não depender
+   do navegador do Instagram/WhatsApp decidir a hora certa */
+document.addEventListener('error', e => {
+  const im = e.target; if (!(im instanceof HTMLImageElement) || !/fotos\//.test(im.src)) return;
+  const t = +(im.dataset.tent || 0); if (t >= 3) return; im.dataset.tent = t + 1;
+  setTimeout(() => { im.src = im.src.split('?')[0] + '?r=' + Date.now(); }, 600 * (t + 1));
+}, true);
+window.addEventListener('load', () => setTimeout(() => {
+  document.querySelectorAll('img[loading="lazy"]').forEach(im => { if (!im.classList.contains('alt')) im.loading = 'eager'; });
+}, 1200));
+
 /* faixa rolante: velocidade constante, seja qual for o idioma ou a tela */
 (() => { const g = document.querySelector('.faixa .f-grp'), t = document.querySelector('.faixa .f-trilho'); if (!g || !t || !window.ResizeObserver) return;
   new ResizeObserver(() => { t.style.animationDuration = Math.max(20, g.offsetWidth / 38) + 's'; }).observe(g); })();
