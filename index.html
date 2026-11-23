@@ -160,15 +160,16 @@ h1,h2,h3{text-wrap:balance}
 .grade{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 12px}
 @media (min-width:980px){.grade{grid-template-columns:repeat(5,minmax(0,1fr));gap:44px 22px}}
 .card{display:flex;flex-direction:column;gap:12px;min-width:0;padding:0;border:0;background:none;text-align:left;color:inherit}
-/* Safari/Chrome do iPhone: dentro de <button> o conteúdo pode encolher até a largura zero; força a largura total da coluna */
-.card{width:100%;align-items:stretch}
+/* o card ocupa sempre a coluna inteira, e a foto tem altura fixa em proporção 9:16 pelo método clássico
+   (padding-top), que funciona em todo navegador, inclusive Safari e Chrome de iPhone */
+.card{width:100%;align-items:stretch;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .card>.card-foto,.card>.card-txt{width:100%;align-self:stretch}
-.card-foto{position:relative;display:block;aspect-ratio:9/16;max-width:100%;overflow:hidden;background:var(--seda);border-radius:2px}
+.card-foto{position:relative;display:block;max-width:100%;overflow:hidden;background:var(--seda);border-radius:2px;flex:none}
+.card-foto::before{content:"";display:block;padding-top:177.78%}
 .card-foto img{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;object-fit:cover;object-position:50% 15%;transition:opacity .45s ease,transform .8s ease}
 .card-foto img.alt{opacity:0}
 /* iPhones com iOS antigo (antes do 15) não entendem aspect-ratio: sem isto, a caixa da foto fica com altura zero e a foto some */
 @supports not (aspect-ratio:1/1){
-  .card-foto::before{content:"";display:block;padding-top:177.78%}
   .g-sug-img{height:149px}
   @media (max-width:860px){.pn-img{height:min(100vw,58vh)}}
 }
@@ -1176,7 +1177,7 @@ function cardHTML(m, larga){
   const ordem = ui.cor ? [corDe(m, ui.cor), ...m.cores.filter(c => c.nome !== ui.cor)] : m.cores;
   const dots = ordem.slice(0, 7).map((c, i) => `<span class="dot${ui.cor && i === 0 ? ' marcado' : ''}" style="${amostra(c.nome, .7)}"></span>`).join('');
   const n = m.cores.length, nc = `${n} ${n > 1 ? 'cores' : 'cor'}`;
-  return `<button class="card${larga ? ' larga' : ''}" type="button" data-mid="${m.id}" aria-label="${esc(m.nome)}, ${nc}, ${reais(m.pix)} no Pix. Ver cores e montar o pedido">
+  return `<div class="card${larga ? ' larga' : ''}" role="button" tabindex="0" data-mid="${m.id}" aria-label="${esc(m.nome)}, ${nc}, ${reais(m.pix)} no Pix. Ver cores e montar o pedido">
     <span class="card-foto"><img src="${src}" alt="" decoding="async">${alt ? `<img class="alt" src="${alt}" alt="" loading="lazy">` : ''}${tag}${ped}</span>
     <span class="card-txt">
       <span class="card-nome">${esc(m.nome)}</span>
@@ -1186,7 +1187,7 @@ function cardHTML(m, larga){
       <span class="card-sug"><small>Sugestão de venda</small><b>R$ ${m.sug[0]} a ${m.sug[1]}</b></span>
       <span class="card-cta" aria-hidden="true">${SACOLA}${qm ? 'Comprar mais' : 'Comprar'}</span>
     </span>
-  </button>`;
+  </div>`;
 }
 function renderCatalogo(){
   const lista = MODELOS.filter(m => !ui.cor || corDe(m, ui.cor));
@@ -1213,6 +1214,7 @@ function renderCatalogo(){
 $('#triCor').innerHTML = ['Marrom', 'Verde esmeralda', 'Poá preto'].map(n => `<span style="${amostra(n, .6)}"></span>`).join('');
 $$('[data-cat]').forEach(b => b.addEventListener('click', () => { ui.cat = b.dataset.cat; renderCatalogo(); }));
 $('#secoes').addEventListener('click', e => { const c = e.target.closest('[data-mid]'); if (c) abrirPainel(c.dataset.mid, { cor: ui.cor }); });
+$('#secoes').addEventListener('keydown', e => { const c = e.target; if ((e.key === 'Enter' || e.key === ' ') && c.classList && c.classList.contains('card')) { e.preventDefault(); abrirPainel(c.dataset.mid, { cor: ui.cor }); } });
 document.addEventListener('click', e => { if (e.target.closest('[data-limpar-cor]')){ ui.cor = null; renderCatalogo(); } });
 
 /* filtro por cor */
