@@ -51,7 +51,7 @@
 html{-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--hh) + 64px)}
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
 body{margin:0;background:var(--creme);color:var(--texto);font-family:var(--sans);font-size:15px;line-height:1.65;font-weight:400}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--creme);z-index:45}
+body::before{content:"";position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top,0px);background:var(--creme);z-index:45}
 img{max-width:100%;display:block}
 button,input,select,textarea{font:inherit;color:inherit}
 button{cursor:pointer}
@@ -115,7 +115,7 @@ h1,h2,h3{text-wrap:balance}
 /* capa */
 .capa{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);min-height:clamp(460px,44vw,620px)}
 .capa-seda{position:relative;display:flex;align-items:center;color:var(--areia);background:url("fotos/seda-caramelo.jpg") center/cover,var(--caramelo)}
-.capa-seda::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(60,40,26,.46),rgba(60,40,26,.24))}
+.capa-seda::before{content:"";position:absolute;top:0;right:0;bottom:0;left:0;background:linear-gradient(100deg,rgba(60,40,26,.46),rgba(60,40,26,.24))}
 .capa-txt{position:relative;width:100%;max-width:640px;margin-left:clamp(0px,4vw,64px);padding-block:56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .capa-pre{margin:0;font-size:.74rem;letter-spacing:.28em;text-transform:uppercase}
 .capa-script{margin:18px 0 0;font-family:var(--script);font-size:clamp(3.6rem,7.4vw,6rem);line-height:.9;font-weight:400}
@@ -125,7 +125,7 @@ h1,h2,h3{text-wrap:balance}
 .capa-acoes{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px}
 .capa-acoes .lnk{color:var(--areia)}
 .capa-foto{margin:0;position:relative;overflow:hidden;background:var(--seda)}
-.capa-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.capa-foto img{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
 
 /* regras */
 .regras{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px 36px;padding-block:56px 20px}
@@ -161,8 +161,15 @@ h1,h2,h3{text-wrap:balance}
 @media (min-width:980px){.grade{grid-template-columns:repeat(5,minmax(0,1fr));gap:44px 22px}}
 .card{display:flex;flex-direction:column;gap:12px;min-width:0;padding:0;border:0;background:none;text-align:left;color:inherit}
 .card-foto{position:relative;display:block;aspect-ratio:9/16;max-width:100%;overflow:hidden;background:var(--seda);border-radius:2px}
-.card-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 15%;transition:opacity .45s ease,transform .8s ease}
+.card-foto img{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;object-fit:cover;object-position:50% 15%;transition:opacity .45s ease,transform .8s ease}
 .card-foto img.alt{opacity:0}
+/* iPhones com iOS antigo (antes do 15) não entendem aspect-ratio: sem isto, a caixa da foto fica com altura zero e a foto some */
+@supports not (aspect-ratio:1/1){
+  .card-foto::before{content:"";display:block;padding-top:177.78%}
+  .g-sug-img{height:149px}
+  @media (max-width:860px){.pn-img{height:min(100vw,58vh)}}
+}
+
 @media (hover:hover){
   .card:hover .card-foto img.alt{opacity:1}
   .card:hover .card-foto img{transform:scale(1.025)}
@@ -235,10 +242,10 @@ h1,h2,h3{text-wrap:balance}
 .btn.bloq{opacity:.55}
 
 /* camadas */
-.overlay{position:fixed;inset:0;z-index:60;background:var(--veu);display:flex}
+.overlay{position:fixed;top:0;right:0;bottom:0;left:0;z-index:60;background:var(--veu);display:flex}
 .ov-zoom{z-index:70;background:#1E1611}
 .zm{position:relative;flex:1;display:flex}
-.zm-palco{position:absolute;inset:0;display:grid;place-items:center;overflow:hidden;touch-action:none;cursor:zoom-in;user-select:none;-webkit-user-select:none}
+.zm-palco{position:absolute;top:0;right:0;bottom:0;left:0;display:grid;place-items:center;overflow:hidden;touch-action:none;cursor:zoom-in;user-select:none;-webkit-user-select:none}
 .zm-palco.zoom{cursor:grab}.zm-palco.arrasta{cursor:grabbing}
 .zm-palco img{max-width:100%;max-height:100%;object-fit:contain;transform-origin:center;will-change:transform;-webkit-user-drag:none}
 .zm-palco.anim img{transition:transform .25s ease}
@@ -263,8 +270,8 @@ h1,h2,h3{text-wrap:balance}
 .pn-visual{display:flex;flex-direction:column;min-height:0;background:var(--seda)}
 .pn-img{position:relative;flex:1;min-height:0;overflow:hidden}
 .pn-img{background:var(--branco)}
-.pn-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center}
-.pn-amostra{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:flex-start;padding:22px}
+.pn-img img{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;object-fit:contain;object-position:center}
+.pn-amostra{position:absolute;top:0;right:0;bottom:0;left:0;display:flex;align-items:flex-end;justify-content:flex-start;padding:22px}
 .pn-etq{margin:0;display:flex;flex-direction:column;gap:2px;padding:14px 20px 12px;background:rgba(251,245,236,.92);border-radius:3px;color:var(--cacau)}
 .pn-etq strong{font-family:var(--display);font-weight:400;font-size:clamp(1.4rem,2.4vw,1.8rem);line-height:1.15}
 .pn-etq span{font-size:.82rem;color:var(--suave)}
@@ -413,7 +420,7 @@ h1,h2,h3{text-wrap:balance}
 .linha{display:grid;grid-template-columns:58px minmax(0,1fr) auto;gap:14px;padding:16px 0;border-bottom:1px solid var(--fio)}
 .l-img{position:relative;width:58px;height:72px;border-radius:2px;overflow:hidden;background:var(--seda)}
 .l-img img{width:100%;height:100%;object-fit:cover}
-.l-img .l-am{position:absolute;inset:0}
+.l-img .l-am{position:absolute;top:0;right:0;bottom:0;left:0}
 .l-nome{margin:0;font-family:var(--display);font-size:1.08rem;line-height:1.25;color:var(--cacau)}
 .l-det,.l-tam{margin:3px 0 0;font-size:.8rem;line-height:1.5}
 .l-det{color:var(--suave)}
