@@ -160,6 +160,9 @@ h1,h2,h3{text-wrap:balance}
 .grade{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 12px}
 @media (min-width:980px){.grade{grid-template-columns:repeat(5,minmax(0,1fr));gap:44px 22px}}
 .card{display:flex;flex-direction:column;gap:12px;min-width:0;padding:0;border:0;background:none;text-align:left;color:inherit}
+/* Safari/Chrome do iPhone: dentro de <button> o conteúdo pode encolher até a largura zero; força a largura total da coluna */
+.card{width:100%;align-items:stretch}
+.card>.card-foto,.card>.card-txt{width:100%;align-self:stretch}
 .card-foto{position:relative;display:block;aspect-ratio:9/16;max-width:100%;overflow:hidden;background:var(--seda);border-radius:2px}
 .card-foto img{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;object-fit:cover;object-position:50% 15%;transition:opacity .45s ease,transform .8s ease}
 .card-foto img.alt{opacity:0}
