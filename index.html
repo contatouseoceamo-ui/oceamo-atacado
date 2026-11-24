@@ -1674,13 +1674,13 @@ async function montarPDF(){
   kv.forEach(([k, v, forte]) => { if (y > H - 22){ doc.addPage(); y = 20; } doc.setFont('helvetica', forte ? 'bold' : 'normal'); doc.setTextColor(forte ? 43 : 110, forte ? 33 : 100, forte ? 26 : 90); doc.text(pdfTxt(k), W - 90, y); doc.setTextColor(43, 33, 26); if (v === ''){ doc.setDrawColor(150, 140, 130); doc.setLineWidth(0.25); doc.line(W - 44, y + 0.8, W - 14, y + 0.8); } else doc.text(pdfTxt(v), W - 14, y, { align:'right' }); y += 6; });
   // Dados da cliente: bloco pequeno no rodapé, em segundo plano (o destaque do PDF é o pedido)
   const campos = [['Nome', D.nome], ['Loja / @', D.loja], ['WhatsApp', D.zap], ['E-mail', D.email], [D.ext ? 'Documento' : 'CPF/CNPJ', D.doc], D.ext ? ['País', D.pais] : null,
-    ['Endereço', D.rua], ['Número', D.num], ['Complemento', D.comp], ['Bairro', D.bairro], ['Cidade', D.cidade], [D.ext ? 'Estado' : 'UF', D.uf], [D.ext ? 'Código postal' : 'CEP', D.cep],
+    ['Endereço', D.rua, false, true], ['Número', D.num], ['Complemento', D.comp], ['Bairro', D.bairro, false, true], ['Cidade', D.cidade], [D.ext ? 'Estado' : 'UF', D.uf], [D.ext ? 'Código postal' : 'CEP', D.cep, false, true],
     ['Observações', D.obs, true]].filter(c => c && c[1] && String(c[1]).trim());
   const COLS = 3, gap = 5, colW = (W - 28 - gap * (COLS - 1)) / COLS, LH = 3.6;
   doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5);
   const celula = ([k, v, cheio]) => doc.splitTextToSize(pdfTxt(`${k}: ${v}`), cheio ? W - 28 : colW);
   let linhasBloco = 0, c0 = 0, altLinha = 0;   // mede a altura do bloco
-  campos.forEach(cp => { const ls = celula(cp).length; if (cp[2]){ if (c0){ linhasBloco += altLinha; c0 = 0; altLinha = 0; } linhasBloco += ls; } else { altLinha = Math.max(altLinha, ls); c0++; if (c0 === COLS){ linhasBloco += altLinha; c0 = 0; altLinha = 0; } } });
+  campos.forEach(cp => { const ls = celula(cp).length; if (cp[3] && c0){ linhasBloco += altLinha; c0 = 0; altLinha = 0; } if (cp[2]){ if (c0){ linhasBloco += altLinha; c0 = 0; altLinha = 0; } linhasBloco += ls; } else { altLinha = Math.max(altLinha, ls); c0++; if (c0 === COLS){ linhasBloco += altLinha; c0 = 0; altLinha = 0; } } });
   if (c0) linhasBloco += altLinha;
   const altBloco = 7 + linhasBloco * LH + 2;
   let yb = Math.max(y + 10, H - 16 - altBloco);   // encosta no pé da página quando há espaço
@@ -1690,6 +1690,7 @@ async function montarPDF(){
   let yy = yb + 6; c0 = 0; altLinha = 0;
   doc.setFontSize(7.5); doc.setTextColor(110, 100, 90);
   campos.forEach(cp => { const ls = celula(cp);
+    if (cp[3] && c0){ yy += altLinha * LH; c0 = 0; altLinha = 0; }
     if (cp[2]){ if (c0){ yy += altLinha * LH; c0 = 0; altLinha = 0; } doc.text(ls, 14, yy); yy += ls.length * LH; return; }
     doc.text(ls, 14 + c0 * (colW + gap), yy); altLinha = Math.max(altLinha, ls.length); c0++;
     if (c0 === COLS){ yy += altLinha * LH; c0 = 0; altLinha = 0; } });
