@@ -1660,28 +1660,8 @@ async function montarPDF(){
   doc.text(pdfTxt('Orçamento de atacado · Nº ' + nro).toUpperCase(), 14, 15.5, { charSpace:0.5 });
   doc.setFontSize(16); doc.setTextColor(43, 33, 26); doc.text(doc.splitTextToSize(pdfTxt(D.nome), W - 70)[0], 14, 23.5);
   doc.setFontSize(9); doc.setTextColor(110, 100, 90); doc.text(pdfTxt('Data: ' + data), 14, 29.5);
-  // Dados da cliente logo no topo, um campo por linha/coluna, para copiar fácil para o sistema
-  let yc = 37;
-  const secao = (t, yy) => { doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5); doc.setTextColor(140, 120, 100); doc.text(pdfTxt(t), 14, yy, { charSpace:0.5 }); doc.setDrawColor(222, 214, 205); doc.setLineWidth(0.2); doc.line(14, yy + 2, W - 14, yy + 2); };
-  secao('DADOS DA CLIENTE', yc); yc += 8;
-  const campos = [['Nome', D.nome], ['Loja / @', D.loja], ['WhatsApp', D.zap], ['E-mail', D.email], [D.ext ? 'Documento' : 'CPF/CNPJ', D.doc], D.ext ? ['País', D.pais] : null,
-    ['Endereço', D.rua, false, true], ['Número', D.num], ['Complemento', D.comp], ['Bairro', D.bairro], ['Cidade', D.cidade], [D.ext ? 'Estado / província' : 'UF', D.uf], [D.ext ? 'Código postal' : 'CEP', D.cep],
-    ['Observações', D.obs, true]].filter(c => c && c[1] && String(c[1]).trim());
-  const colW = (W - 28 - 8) / 2; let col = 0, alt = 0;
-  const quebra = () => { yc += alt; col = 0; alt = 0; };
-  campos.forEach(([k, v, cheio, nova]) => {
-    if ((cheio || nova) && col) quebra();
-    const larg = cheio ? W - 28 : colW, x = col ? 14 + colW + 8 : 14;
-    doc.setFontSize(9.5); const ls = doc.splitTextToSize(pdfTxt(String(v)), larg);
-    doc.setFont('helvetica', 'normal'); doc.setFontSize(7); doc.setTextColor(140, 120, 100); doc.text(pdfTxt(k), x, yc);
-    doc.setFontSize(9.5); doc.setTextColor(43, 33, 26); doc.text(ls, x, yc + 4.4);
-    alt = Math.max(alt, 4.4 + ls.length * 4.2 + 3);
-    if (cheio || col) quebra(); else col = 1;
-  });
-  if (col) quebra();
-  yc += 3; secao('PEDIDO', yc); yc += 5;
   const body = linhas.map(l => [pdfTxt(`Conjunto ${l.m.nome}${l.it.calc === PROPRIA ? '' : ' com calcinha ' + l.it.calc.toLowerCase()} - ${l.it.cor}\n${gradePDF(l.it.tam)}${l.it.obs ? '\nObs.: ' + l.it.obs : ''}`), String(l.q), pdfTxt(brl(l.u)), pdfTxt(brl(l.sub))]);
-  doc.autoTable({ theme:'plain', startY:yc, head:[['DESCRIÇÃO', 'QNT', 'ATACADO', 'VALOR'].map(pdfTxt)], body,
+  doc.autoTable({ theme:'plain', startY:36, head:[['DESCRIÇÃO', 'QNT', 'ATACADO', 'VALOR'].map(pdfTxt)], body,
     styles:{ font:'helvetica', fontSize:9, cellPadding:{ top:2.2, bottom:2.2, left:1.5, right:1.5 }, textColor:[43, 33, 26], valign:'top', overflow:'linebreak' },
     headStyles:{ fontSize:7.5, textColor:[140, 120, 100], fontStyle:'normal' }, margin:{ left:14, right:14, bottom:16 },
     columnStyles:{ 1:{ halign:'right', cellWidth:16 }, 2:{ halign:'right', cellWidth:26 }, 3:{ halign:'right', cellWidth:28 } },
@@ -1692,6 +1672,27 @@ async function montarPDF(){
               ['Pagamento', forma === 'pix' ? 'Pix à vista' : `Cartão em ${state.parcelas}x sem juros`], ['Valor pago', brl(0)], ['Valor restante (sem frete)', brl(tot), true]];
   doc.setFontSize(9.5);
   kv.forEach(([k, v, forte]) => { if (y > H - 22){ doc.addPage(); y = 20; } doc.setFont('helvetica', forte ? 'bold' : 'normal'); doc.setTextColor(forte ? 43 : 110, forte ? 33 : 100, forte ? 26 : 90); doc.text(pdfTxt(k), W - 90, y); doc.setTextColor(43, 33, 26); if (v === ''){ doc.setDrawColor(150, 140, 130); doc.setLineWidth(0.25); doc.line(W - 44, y + 0.8, W - 14, y + 0.8); } else doc.text(pdfTxt(v), W - 14, y, { align:'right' }); y += 6; });
+  // Dados da cliente: bloco pequeno no rodapé, em segundo plano (o destaque do PDF é o pedido)
+  const campos = [['Nome', D.nome], ['Loja / @', D.loja], ['WhatsApp', D.zap], ['E-mail', D.email], [D.ext ? 'Documento' : 'CPF/CNPJ', D.doc], D.ext ? ['País', D.pais] : null,
+    ['Endereço', D.rua], ['Número', D.num], ['Complemento', D.comp], ['Bairro', D.bairro], ['Cidade', D.cidade], [D.ext ? 'Estado' : 'UF', D.uf], [D.ext ? 'Código postal' : 'CEP', D.cep],
+    ['Observações', D.obs, true]].filter(c => c && c[1] && String(c[1]).trim());
+  const COLS = 3, gap = 5, colW = (W - 28 - gap * (COLS - 1)) / COLS, LH = 3.6;
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5);
+  const celula = ([k, v, cheio]) => doc.splitTextToSize(pdfTxt(`${k}: ${v}`), cheio ? W - 28 : colW);
+  let linhasBloco = 0, c0 = 0, altLinha = 0;   // mede a altura do bloco
+  campos.forEach(cp => { const ls = celula(cp).length; if (cp[2]){ if (c0){ linhasBloco += altLinha; c0 = 0; altLinha = 0; } linhasBloco += ls; } else { altLinha = Math.max(altLinha, ls); c0++; if (c0 === COLS){ linhasBloco += altLinha; c0 = 0; altLinha = 0; } } });
+  if (c0) linhasBloco += altLinha;
+  const altBloco = 7 + linhasBloco * LH + 2;
+  let yb = Math.max(y + 10, H - 16 - altBloco);   // encosta no pé da página quando há espaço
+  if (yb + altBloco > H - 14){ doc.addPage(); yb = 20; }
+  doc.setDrawColor(222, 214, 205); doc.setLineWidth(0.2); doc.line(14, yb - 3, W - 14, yb - 3);
+  doc.setFontSize(6.5); doc.setTextColor(150, 140, 130); doc.text(pdfTxt('DADOS DA CLIENTE'), 14, yb + 1, { charSpace:0.4 });
+  let yy = yb + 6; c0 = 0; altLinha = 0;
+  doc.setFontSize(7.5); doc.setTextColor(110, 100, 90);
+  campos.forEach(cp => { const ls = celula(cp);
+    if (cp[2]){ if (c0){ yy += altLinha * LH; c0 = 0; altLinha = 0; } doc.text(ls, 14, yy); yy += ls.length * LH; return; }
+    doc.text(ls, 14 + c0 * (colW + gap), yy); altLinha = Math.max(altLinha, ls.length); c0++;
+    if (c0 === COLS){ yy += altLinha * LH; c0 = 0; altLinha = 0; } });
   const n = doc.getNumberOfPages();
   for (let k = 1; k <= n; k++){ doc.setPage(k); doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5); doc.setTextColor(150, 140, 130); doc.text('Oceamo Swimwear', 14, H - 8); if (n > 1) doc.text(`${k} de ${n}`, W - 14, H - 8, { align:'right' }); }
   doc.setProperties({ title:pdfTxt(`Orçamento ${nro} - ${D.nome}`), subject:pdfTxt('Orçamento de atacado Oceamo'), author:pdfTxt(D.nome || ''), creator:'Oceamo Atacado' });
