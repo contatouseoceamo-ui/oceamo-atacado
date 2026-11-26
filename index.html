@@ -388,6 +388,7 @@ h1,h2,h3{text-wrap:balance}
 .matriz input::placeholder{color:#CDB89E}
 .matriz td.igual input{background:rgba(200,154,111,.16)}
 .pn-dica{margin:0;padding-top:16px;border-top:1px solid var(--fio);font-size:.88rem;color:var(--suave)}
+.pn-dica.ok{color:var(--ok);font-weight:500}
 .pn-rod{border-top:1px solid var(--fio);padding:14px 44px 18px;display:flex;flex-direction:column;gap:10px;background:var(--areia)}
 .pn-msg{margin:0;font-size:.84rem;line-height:1.5}
 .pn-msg.erro{color:var(--erro)}
@@ -1283,7 +1284,8 @@ function renderPainel(){
   if (fixaCor) pn.calc = fixaCor;
   const prop = !!calcFixa(m) || !!fixaCor;
   $('#pnCalcs').hidden = prop; $('#pnCalcs').previousElementSibling.hidden = prop; $('#pnMeioFio').hidden = prop; renderCalcPrev();
-  $('#pnDica').textContent = prop ? 'Toque em uma cor para ver os tamanhos.' : 'Toque em uma cor para ver as opções de calcinha e tamanhos.';
+  $('#pnDica').textContent = pn.ok ? 'Incluído no pedido! Para incluir outra cor deste modelo, toque na cor acima.' : (prop ? 'Toque em uma cor para ver os tamanhos.' : 'Toque em uma cor para ver as opções de calcinha e tamanhos.');
+  $('#pnDica').classList.toggle('ok', !!pn.ok);
   $('#pnOpcoes').hidden = !pn.cor;
   $('#pnDica').hidden = !!pn.cor;
   $('#pnDif').checked = pn.dif;
@@ -1361,7 +1363,7 @@ function aviso(tipo, txt){
 $('#pnCores').addEventListener('click', e => {
   const b = e.target.closest('[data-cor]'); if (!b) return;
   const primeira = !pn.cor;
-  pn.cor = b.dataset.cor; pn.fotoSel = null; aviso(null); renderPainel();
+  pn.cor = b.dataset.cor; pn.fotoSel = null; pn.ok = false; aviso(null); renderPainel();
   const alvo = $(`#pnCores [data-cor="${CSS.escape(pn.cor)}"]`); if (alvo) alvo.focus({ preventScroll:true });
   if (primeira && window.matchMedia('(max-width:860px)').matches) $('#pnOpcoes').scrollIntoView({ block:'nearest', behavior:'smooth' });
 });
@@ -1438,12 +1440,16 @@ function incluir(){
   if (igual) Object.entries(tam).forEach(([k, v]) => igual.tam[k] = (igual.tam[k] || 0) + v);
   else state.itens.push({ uid: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), mid:m.id, cor:pn.cor, calc:pn.calc, tam, obs:(pn.obs || '').trim() });
   salvar(); atualizar();
-  const tot = totalPecas();
-  pn.tam = {}; pn.obs = ''; renderPainel();
+  const tot = totalPecas(), corInc = pn.cor;
+  // depois de incluir, a seleção recomeça: a cliente escolhe a próxima cor do mesmo modelo do zero
+  pn.tam = {}; pn.obs = ''; pn.cor = null; pn.fotoSel = null; pn.calc = calcFixa(m) || null; pn.dif = false; pn.ok = true; renderPainel();
+  pn.cor = corInc;
   aviso('ok', `Incluído: ${pecas(n)} na cor ${pn.cor.toLowerCase()}. ${tot >= MINIMO ? `Seu pedido tem ${pecas(tot)}.` : `Seu pedido tem ${tot} de ${MINIMO} conjuntos.`} Escolha outra cor ou feche para ver outros modelos.`);
   const ver = document.createElement('button'); ver.type = 'button'; ver.className = 'lnk'; ver.textContent = 'Ver pedido';
   ver.addEventListener('click', () => { fecharOv('#ovPainel'); abrirOv('#ovPedido'); });
   $('#pnMsg').append(' ', ver);
+  pn.cor = null;
+  const topo = $('#pnCores'); if (topo) topo.scrollIntoView({ block:'start', behavior:'smooth' });
 }
 
 /* ---------- pedido ---------- */
@@ -2199,6 +2205,7 @@ const I18N = {
   'Cor única': ['Single color', 'Color único'],
   'Toque em uma cor para ver as opções de calcinha e tamanhos.': ['Tap a color to see the bottom options and sizes.', 'Toca un color para ver las opciones de panty y tallas.'],
   'Toque em uma cor para ver os tamanhos.': ['Tap a color to see the sizes.', 'Toca un color para ver las tallas.'],
+  'Incluído no pedido! Para incluir outra cor deste modelo, toque na cor acima.': ['Added to your order! To add another color of this style, tap a color above.', '¡Agregado al pedido! Para agregar otro color de este modelo, toca un color arriba.'],
   'Modelo da calcinha': ['Bottom style', 'Modelo del panty'],
   'Escolha uma': ['Choose one', 'Elige uno'],
   'Todas as calcinhas têm a parte de trás no padrão meio fio.': ['All bottoms have a cheeky back (meio fio).', 'Todos los panties tienen la parte de atrás tipo semi-hilo (meio fio).'],
