@@ -1596,6 +1596,8 @@ $('#fParc').addEventListener('change', e => { state.parcelas = +e.target.value; 
 
 const CAMPOS = { nome:'#fNome', loja:'#fLoja', zap:'#fZap', email:'#fEmail', doc:'#fDoc', cep:'#fCep', rua:'#fRua', num:'#fNum', comp:'#fComp', bairro:'#fBairro', cidade:'#fCidade', uf:'#fUf', pais:'#fPais', obs:'#fObs' };
 Object.entries(CAMPOS).forEach(([k, s]) => { if (state.dados[k]) $(s).value = state.dados[k]; });
+// @ informado no desbloqueio dos preços já entra no cadastro
+try { const ac = JSON.parse(localStorage.getItem('oceamo-acesso') || 'null'); if (ac && ac.loja && !$('#fLoja').value.trim()){ $('#fLoja').value = ac.loja; state.dados.loja = ac.loja; } } catch (e) {}
 /* cliente de fora do Brasil: documento, código postal, estado e país livres */
 const ehExt = () => !!state.dados.ext;
 function aplicarExt(){
@@ -1878,7 +1880,7 @@ $('#acForm').addEventListener('submit', e => {
   if (v.replace('@', '').length < 3) return erro('Informe o @ da sua loja.');
   if (!v.startsWith('@')) v = '@' + v;
   try { localStorage.setItem('oceamo-acesso', JSON.stringify({ loja:v, em:new Date().toISOString() })); } catch (e) {}
-  if (!state.dados.loja){ state.dados.loja = v; salvar(); }
+  if (!$('#fLoja').value.trim()){ $('#fLoja').value = v; state.dados.loja = v; salvar(); }
   $('#acErro').hidden = true; aplicarAcesso(); fecharOv('#ovAcesso');
   if (!$('#ovPainel').hidden) renderPainel();
   renderCatalogo(); toast('Preços liberados');
