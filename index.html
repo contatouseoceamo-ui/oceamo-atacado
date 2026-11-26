@@ -503,6 +503,24 @@ h1,h2,h3{text-wrap:balance}
 .sec{display:flex;flex-direction:column;gap:20px;padding-block:28px;border-top:1px solid var(--fio)}
 .dados form>.sec:first-of-type{margin-top:28px}
 .sec h2{margin:0;font-family:var(--display);font-weight:500;font-size:1.3rem;color:var(--cacau)}
+/* bloqueio de preços: borrados até a cliente seguir o Instagram e informar o @ da loja */
+.bloq .card-precos,.bloq .card-sug b,.bloq .pn-precos .pn-pix>span,.bloq .pn-precos .pn-cartao>span,.bloq .pn-precos .pn-sug>span,.bloq #pnSub{filter:blur(7px);user-select:none;-webkit-user-select:none}
+.ac-faixa{display:none}
+.bloq .ac-faixa{display:flex;align-items:center;justify-content:space-between;gap:12px 20px;flex-wrap:wrap;margin-block:22px 4px;padding:14px 18px;border:1px solid var(--fio);border-radius:4px;background:var(--areia)}
+.ac-faixa p{margin:0;display:flex;align-items:center;gap:10px;font-size:.9rem;color:var(--cacau)}
+.ac-faixa svg,.ac-pn svg{width:18px;height:18px;flex:none}
+.ac-faixa .btn{min-height:40px;padding:0 20px;font-size:.88rem}
+.ac-pn{display:none}
+.bloq .ac-pn{display:flex;align-items:center;gap:8px;margin:10px 0 0;padding:0;border:0;background:none;color:var(--caramelo-esc);font-size:.86rem;font-weight:500;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+#ovAcesso .folha{width:min(460px,100%)}
+.ac-corpo{padding:4px 24px 26px;display:flex;flex-direction:column;gap:18px}
+.ac-corpo>p{margin:0;font-size:.92rem;color:var(--suave);line-height:1.55}
+.ac-passo{display:flex;flex-direction:column;gap:10px}
+.ac-passo b{font-size:.78rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--suave)}
+.ac-ig{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;border-radius:999px;border:1px solid var(--caramelo-esc);color:var(--caramelo-esc);font-weight:500;text-decoration:none}
+.ac-ig svg{width:20px;height:20px}
+.ac-ig.feito{background:rgba(138,90,51,.08)}
+.ac-erro{margin:0;font-size:.84rem;color:var(--erro)}
 .campos{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:18px 20px}
 .campo{display:flex;flex-direction:column;gap:4px;min-width:0;grid-column:span 3}
 .campo.c2{grid-column:span 2}.campo.c4{grid-column:span 4}.campo.c6{grid-column:1/-1}.campo.c1{grid-column:span 1}
@@ -696,6 +714,7 @@ h1,h2,h3{text-wrap:balance}
   </section>
 
   <section id="modelos" aria-label="Modelos">
+    <div class="wrap"><div class="ac-faixa"><p><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="1.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>Preços exclusivos para revendedoras. Siga @useoceamo no Instagram para ver os valores.</span></p><button class="btn" type="button" data-acesso>Ver preços</button></div></div>
     <div class="filtros">
       <div class="wrap filtros-in">
         <div class="abas" role="group" aria-label="Categorias">
@@ -872,6 +891,7 @@ h1,h2,h3{text-wrap:balance}
             <span class="pn-cartao num"><small>Cartão</small><span id="pnCartao"></span></span>
             <span class="pn-sug num"><small>Sugestão de venda</small><span id="pnSugV"></span></span>
           </div>
+          <button class="ac-pn" type="button" data-acesso><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="1.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Desbloquear preços</button>
           <span class="moeda" data-so-lang="en es" hidden>Valores em reais (R$), moeda do Brasil.</span>
         </div>
         <div>
@@ -942,6 +962,24 @@ h1,h2,h3{text-wrap:balance}
     <button class="zm-nav zm-ant" type="button" id="zmAnt" aria-label="Foto anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
     <button class="zm-nav zm-prox" type="button" id="zmProx" aria-label="Próxima foto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
     <p class="zm-dica" id="zmDica"></p>
+  </div>
+</div>
+
+<div class="overlay ov-folha" id="ovAcesso" hidden>
+  <div class="folha" role="dialog" aria-modal="true" aria-labelledby="acTit">
+    <div class="f-cab">
+      <h2 id="acTit">Preços para revendedoras</h2>
+      <button class="x" type="button" data-fechar aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <form class="ac-corpo" id="acForm" novalidate>
+      <p>Os valores de atacado são exclusivos para revendedoras. Siga a Oceamo no Instagram e informe o @ da sua loja para ver os preços.</p>
+      <div class="ac-passo"><b>1. Siga a Oceamo</b>
+        <a class="ac-ig" id="acIg" href="https://www.instagram.com/useoceamo/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".9" fill="currentColor" stroke="none"/></svg><span>Seguir @useoceamo no Instagram</span></a></div>
+      <div class="ac-passo campo"><b><label for="acLoja">2. Informe o @ da sua loja</label></b>
+        <input id="acLoja" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="@sualoja"></div>
+      <p class="ac-erro" id="acErro" role="alert" hidden></p>
+      <button class="btn cheio" type="submit">Ver preços</button>
+    </form>
   </div>
 </div>
 
@@ -1178,7 +1216,7 @@ function cardHTML(m, larga){
   const ordem = ui.cor ? [corDe(m, ui.cor), ...m.cores.filter(c => c.nome !== ui.cor)] : m.cores;
   const dots = ordem.slice(0, 7).map((c, i) => `<span class="dot${ui.cor && i === 0 ? ' marcado' : ''}" style="${amostra(c.nome, .7)}"></span>`).join('');
   const n = m.cores.length, nc = `${n} ${n > 1 ? 'cores' : 'cor'}`;
-  return `<div class="card${larga ? ' larga' : ''}" role="button" tabindex="0" data-mid="${m.id}" aria-label="${esc(m.nome)}, ${nc}, ${reais(m.pix)} no Pix. Ver cores e montar o pedido">
+  return `<div class="card${larga ? ' larga' : ''}" role="button" tabindex="0" data-mid="${m.id}" aria-label="${esc(m.nome)}, ${nc}${temAcesso() ? `, ${reais(m.pix)} no Pix` : ''}. Ver cores e montar o pedido">
     <span class="card-foto"><img src="${src}" alt="" decoding="async">${alt ? `<img class="alt" src="${alt}" alt="" loading="lazy">` : ''}${tag}${ped}</span>
     <span class="card-txt">
       <span class="card-nome">${esc(m.nome)}</span>
@@ -1424,6 +1462,7 @@ $('#pnDif').addEventListener('change', e => {
 $('#btnMedidas').addEventListener('click', () => abrirOv('#ovMedidas'));
 $('#pnIncluir').addEventListener('click', incluir);
 function incluir(){
+  if (!temAcesso()) return abrirOv('#ovAcesso');
   const m = M(pn.mid), n = soma(pn.tam);
   if (!pn.cor) return aviso('erro', 'Escolha uma cor.');
   if (!pn.calc) return aviso('erro', 'Escolha o modelo da calcinha.');
@@ -1821,6 +1860,30 @@ function gerarOrcamento(){
   prepararEnvio();
 }
 $('#btnPDF').addEventListener('click', entregarPDF);
+/* ---------- acesso aos preços ---------- */
+function temAcesso(){
+  try { if (JSON.parse(localStorage.getItem('oceamo-acesso') || 'null')) return true; } catch (e) {}
+  return state.itens.length > 0;   // quem já tinha pedido em andamento continua vendo
+}
+function aplicarAcesso(){ document.documentElement.classList.toggle('bloq', !temAcesso()); }
+aplicarAcesso();
+document.addEventListener('click', e => { if (e.target.closest('[data-acesso]')){ e.preventDefault(); e.stopPropagation(); abrirOv('#ovAcesso'); setTimeout(() => $('#acLoja').focus({ preventScroll:true }), 60); } }, true);
+$('#acIg').addEventListener('click', () => { $('#acIg').classList.add('feito'); try { sessionStorage.setItem('oceamo-ig', '1'); } catch (e) {} });
+$('#acForm').addEventListener('submit', e => {
+  e.preventDefault();
+  let v = $('#acLoja').value.trim().replace(/\s+/g, '');
+  const erro = t => { $('#acErro').textContent = t; $('#acErro').hidden = false; };
+  let seguiu = $('#acIg').classList.contains('feito'); try { seguiu = seguiu || sessionStorage.getItem('oceamo-ig') === '1'; } catch (e) {}
+  if (!seguiu) return erro('Toque em "Seguir @useoceamo no Instagram" primeiro.');
+  if (v.replace('@', '').length < 3) return erro('Informe o @ da sua loja.');
+  if (!v.startsWith('@')) v = '@' + v;
+  try { localStorage.setItem('oceamo-acesso', JSON.stringify({ loja:v, em:new Date().toISOString() })); } catch (e) {}
+  if (!state.dados.loja){ state.dados.loja = v; salvar(); }
+  $('#acErro').hidden = true; aplicarAcesso(); fecharOv('#ovAcesso');
+  if (!$('#ovPainel').hidden) renderPainel();
+  renderCatalogo(); toast('Preços liberados');
+});
+
 /* fotos: se uma imagem falhar (rede do celular instável), tenta de novo sozinha;
    e, depois que a página carrega, busca as fotos "preguiçosas" para não depender
    do navegador do Instagram/WhatsApp decidir a hora certa */
@@ -2143,6 +2206,17 @@ const I18N = {
   'Total dos produtos': ['Products total', 'Total de los productos'],
   'Observações': ['Notes', 'Observaciones'],
   'Condições': ['Terms', 'Condiciones'],
+  'Preços exclusivos para revendedoras. Siga @useoceamo no Instagram para ver os valores.': ['Wholesale prices are for resellers only. Follow @useoceamo on Instagram to see them.', 'Precios exclusivos para revendedoras. Sigue a @useoceamo en Instagram para ver los valores.'],
+  'Ver preços': ['See prices', 'Ver precios'],
+  'Desbloquear preços': ['Unlock prices', 'Desbloquear precios'],
+  'Preços para revendedoras': ['Prices for resellers', 'Precios para revendedoras'],
+  'Os valores de atacado são exclusivos para revendedoras. Siga a Oceamo no Instagram e informe o @ da sua loja para ver os preços.': ['Wholesale prices are for resellers only. Follow Oceamo on Instagram and enter your store’s @ to see the prices.', 'Los valores mayoristas son exclusivos para revendedoras. Sigue a Oceamo en Instagram e indica el @ de tu tienda para ver los precios.'],
+  '1. Siga a Oceamo': ['1. Follow Oceamo', '1. Sigue a Oceamo'],
+  'Seguir @useoceamo no Instagram': ['Follow @useoceamo on Instagram', 'Seguir a @useoceamo en Instagram'],
+  '2. Informe o @ da sua loja': ['2. Enter your store’s @', '2. Indica el @ de tu tienda'],
+  'Toque em "Seguir @useoceamo no Instagram" primeiro.': ['Tap "Follow @useoceamo on Instagram" first.', 'Toca "Seguir a @useoceamo en Instagram" primero.'],
+  'Informe o @ da sua loja.': ['Enter your store’s @.', 'Indica el @ de tu tienda.'],
+  'Preços liberados': ['Prices unlocked', 'Precios desbloqueados'],
   'Condições do atacado': ['Wholesale terms', 'Condiciones mayoristas'],
   'Alterações e cancelamento:': ['Changes and cancellation:', 'Cambios y cancelación:'],
   'após o pagamento, o pedido segue direto para o corte e não pode mais ser alterado nem cancelado;': ['after payment, the order goes straight to cutting and can no longer be changed or canceled;', 'después del pago, el pedido pasa directo al corte y ya no se puede modificar ni cancelar;'],
